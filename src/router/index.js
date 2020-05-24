@@ -11,10 +11,10 @@ const routes = [
   },
   {
     path: '/',
-    redirect: '/NJUSE'
+    redirect: '/home'
   },
   {
-    path: '/NJUSE',
+    path: '/home',
     name: 'layout',
     redirect: '/page',
     component: ()=> import('@/views/layout'),
