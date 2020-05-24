@@ -27,10 +27,10 @@
             <a-input
               size="large"
               type="text"
-              placeholder="邮箱"
+              placeholder="用户名或手机号"
               v-decorator="[
                 'username',
-                {rules: [{ required: true, message: '请输入邮箱地址' }], validateTrigger: 'blur'}
+                {rules: [{ required: true, message: '用户名或手机号' }], validateTrigger: 'blur'}
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -63,17 +63,6 @@
         </a-tab-pane>
 
         <a-tab-pane key="tab2" tab="注册新账号">
-          <a-form-item>
-            <a-input
-              size="large"
-              type="email"
-              placeholder="邮箱"
-              v-decorator="[
-              'registerUserMail', 
-              {rules: [{ required: true, type: 'email', message: '请输入邮箱' }], validateTrigger: 'blur'}]">
-              <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-            </a-input>
-          </a-form-item>
           <a-form-item>
             <a-input
               size="large"
@@ -133,7 +122,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'login',
@@ -171,22 +160,22 @@ export default {
       ]),
 
     // handler
-    handleUsernameOrEmail (rule, value, callback) {
-      const { state } = this
+    handleUsername (rule, value, callback) {
+      //const { state } = this
       const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
       if (regex.test(value)) {
         callback()
       } else {
-        callback(new Error('请输入有效用户名或邮箱'))
+        callback(new Error('请输入有效用户名'))
       }
       callback()
     },
-    checkEmail(rule, value, callback) {
-        const re = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
+    checkPhoneNumber(rule, value, callback) {
+        const re = /^1[0-9]{10}$/
         if (re.test(value)) {
             callback();
         } else {
-            callback(new Error('请输入有效邮箱'));
+            callback(new Error('请输入有效手机号'));
         }
         callback()
     },
@@ -212,7 +201,7 @@ export default {
     },
     handlelogin() {
       const validateFieldsKey = this.customActiveKey === 'tab1' ? ['username', 'password'] : ['registerUsername', 'registerUserMail','registerPassword','registerPasswordconfirm']
-      this.form.validateFields(validateFieldsKey, { force: true }, async (err, values) => {
+      this.form.validateFields(validateFieldsKey, { force: true }, async (err) => {
         if(!err){
           this.loginLoading = true
           const data = {
@@ -228,7 +217,7 @@ export default {
     handleRegister() {
       const { form: { validateFields } } = this
       const validateFieldsKey = this.customActiveKey === 'tab1' ? ['username', 'password'] : ['registerUsername','registerPhoneNumber','registerUserMail','registerPassword','registerPasswordconfirm']
-      validateFields(validateFieldsKey, { force: true }, async (err, values) => {
+      validateFields(validateFieldsKey, { force: true }, async (err) => {
         if (!err) {
           this.registerLoading = true
           const data = {
