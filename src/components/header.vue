@@ -8,7 +8,7 @@
         <a-menu v-model="current" mode="horizontal" theme="light">
             <a-menu-item key="1" @click="selectMenu">
                 <router-link to="/hotel/hotelList">
-                    <a-icon type="home" />首页
+                    <a-icon type="home" />"首页-Write_Together"
                 </router-link>
             </a-menu-item>
             <a-menu-item key="2" @click="jumpToUserInfo" v-if="userInfo.userType=='Client'">
@@ -17,11 +17,6 @@
             <a-menu-item key="3" @click="selectMenu" v-if="userInfo.userType=='HotelManager'">
                 <router-link :to="{ name: 'manageHotel'}">
                      <a-icon type="switcher" />作品管理
-                </router-link>
-            </a-menu-item>
-            <a-menu-item key="4" @click="selectMenu" v-if="userInfo.userType=='Admin'">
-                <router-link :to="{ name: 'manageUser'}">
-                     <a-icon type="user" />账户管理
                 </router-link>
             </a-menu-item>
         </a-menu>
@@ -39,7 +34,7 @@
                 </a-menu-item>
                 <a-menu-item @click="jumpToUserInfo()">
                     <a-icon type="profile"></a-icon>
-                    我的信息
+                    个人信息
                 </a-menu-item>
                 <a-menu-item @click="quit()">
                     <a-icon type="poweroff"></a-icon>
