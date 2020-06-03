@@ -3,7 +3,6 @@
         <div class="label">
             <img src="@/assets/logo.svg" class="logo" alt="logo" @click="jumpToHome">
             <span class="title">Write Together</span>
-            
         </div>
         <a-menu v-model="current" mode="horizontal" theme="light">
             <a-menu-item key="1" @click="selectMenu">
@@ -13,11 +12,6 @@
             </a-menu-item>
             <a-menu-item key="2" @click="jumpToUserInfo" v-if="userInfo.userType=='Client'">
                 <a-icon type="user" />个人中心
-            </a-menu-item>
-            <a-menu-item key="3" @click="selectMenu" v-if="userInfo.userType=='HotelManager'">
-                <router-link :to="{ name: 'manageHotel'}">
-                     <a-icon type="switcher" />作品管理
-                </router-link>
             </a-menu-item>
         </a-menu>
         <div class="logout">
@@ -63,7 +57,7 @@ export default {
         ])
     },
     mounted() {
-        if (this.$route.name == 'hotelList' || this.$route.name == 'hotelDetail') {
+        if (this.$route.name == 'home') {
             this.current = ['1']
         }else if(this.$route.name == 'userInfo') {
             this.current = ['2']
@@ -80,7 +74,7 @@ export default {
         ...mapActions([
             'logout'
         ]),
-        selectMenu(v){
+        selectMenu(){
         },
         async quit() {
             await this.$store.dispatch('logout')
