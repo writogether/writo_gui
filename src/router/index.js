@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/login.vue'
-
 Vue.use(VueRouter)
 const routes = [
   {
@@ -18,6 +17,14 @@ const routes = [
     name: 'layout',
     redirect: '/page',
     component: ()=> import('@/views/layout'),
+    children:[
+      {
+        path:'/story/content',
+        name:'storyContent',
+        component: () => import('@/views/story/content')
+      },
+
+    ]
 
   },
 ]
