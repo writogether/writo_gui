@@ -23,6 +23,12 @@ const routes = [
         name:'storyContent',
         component: () => import('@/views/story/content')
       },
+	  
+      {
+        path: '/user/info/:userId',
+        name: 'userInfo',
+        component: () => import('@/views/user/info')
+      },
 
     ]
 

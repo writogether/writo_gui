@@ -47,11 +47,83 @@
 </template>
 
 <script>
-    export default {
-        name: "personal"
+    
+export default {
+    name: 'info',
+    data(){
+        return {
+            modify: false,
+            formLayout: 'horizontal',
+            pagination: {},
+            columns,
+            data: [],
+            form: this.$form.createForm(this, { name: 'coordinated' }),
+        }
+    },
+    components: {
+    },
+    computed: {
+        ...mapGetters([
+            'userId',
+            'userInfo',
+        ])
+    },
+    async mounted() {
+        await this.getUserInfo()
+    },
+    methods: {
+        ...mapActions([
+            'getUserInfo',
+            'getUserOrders',
+        ]),
+        saveModify() {
+            this.form.validateFields((err, values) => {
+                if (!err) {
+                    const data = {
+                        userName: this.form.getFieldValue('userName'),
+                        phoneNumber: this.form.getFieldValue('phoneNumber'),
+                        password: this.form.getFieldValue('password')
+                    }
+                    this.updateUserInfo(data).then(()=>{
+                        this.modify = false
+                    })
+                }
+            });
+        },
+        modifyInfo() {
+            setTimeout(() => {
+                this.form.setFieldsValue({
+                    'userName': this.userInfo.userName,
+                    'phoneNumber': this.userInfo.phoneNumber,
+                })
+            }, 0)
+            this.modify = true
+        },
+        cancelModify() {
+            this.modify = false
+        },
+        
     }
+}
 </script>
-
-<style scoped>
-
+<style scoped lang="less">
+    .info-wrapper {
+        padding: 50px;
+        .chart {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px
+        }
+    }
+</style>
+<style lang="less">
+    .info-wrapper {
+        .ant-tabs-bar {
+            padding-left: 30px
+        }
+    }
+</style>
+<style lang="less">
+    
 </style>
