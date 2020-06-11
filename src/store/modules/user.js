@@ -31,7 +31,7 @@ const user = {
             state.userId = '',
             state.userInfo = {
                 
-            },
+            }
         },
         set_token: function(state, token){
             state.token = token
