@@ -61,10 +61,9 @@ export default {
             this.current = ['1']
         }else if(this.$route.name == 'userInfo') {
             this.current = ['2']
-        }else if(this.$route.name == 'manageHotel') {
-            this.current = ['3']
+        }
         }else {
-            this.current = ['4']
+            this.current = ['3']
         }
     },
     methods: {
