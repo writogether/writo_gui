@@ -74,17 +74,6 @@
           </a-form-item>
           <a-form-item>
             <a-input
-                    size="large"
-                    type="email"
-                    placeholder="邮箱"
-                    v-decorator="[
-              'registerUserMail',
-              {rules: [{ required: true, type: 'email', message: '请输入邮箱' }], validateTrigger: 'blur'}]">
-              <a-icon slot="prefix" type="mail" :style="{ color: 'rgba(0,0,0,.25)' }"/>
-            </a-input>
-          </a-form-item>
-          <a-form-item>
-            <a-input
               size="large"
               placeholder="手机号"
               v-decorator="[
@@ -210,7 +199,7 @@ export default {
       this.customActiveKey = key
     },
     handlelogin() {
-      const validateFieldsKey = this.customActiveKey === 'tab1' ? ['username', 'password'] : ['registerUsername', 'registerUserMail','registerPhoneNumber','registerPassword','registerPasswordconfirm']
+      const validateFieldsKey = this.customActiveKey === 'tab1' ? ['username', 'password'] : ['registerUsername','registerPhoneNumber','registerPassword','registerPasswordconfirm']
       this.form.validateFields(validateFieldsKey, { force: true }, async (err) => {
         if(!err){
           this.loginLoading = true
@@ -231,7 +220,6 @@ export default {
         if (!err) {
           this.registerLoading = true
           const data = {
-            email: this.form.getFieldValue('registerUserMail'),
             password: this.form.getFieldValue('registerPassword'),
             phoneNumber: this.form.getFieldValue('registerPhoneNumber'),
             username: this.form.getFieldValue('registerUsername'),
@@ -240,7 +228,6 @@ export default {
           await this.register(data).then(() => {
             this.customActiveKey = 'tab1'
             this.form.setFieldsValue({
-              'registerUserMail': '',
               'registerPassword': '',
               'registerPasswordconfirm': ''
             })
