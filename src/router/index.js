@@ -16,18 +16,19 @@ const routes = [
     path: '/home',
     name: 'layout',
     redirect: '/page',
-    component: ()=> import('@/views/layout'),
+    component: ()=> import('../views/layout'),
     children:[
       {
         path:'/story/content',
         name:'storyContent',
-        component: () => import('@/views/story/content')
+        component: () => import('../views/story/content.vue')
       },
-	  
+      // eslint-disable-next-line no-mixed-spaces-and-tabs
+
       {
         path: '/user/info/:userId',
         name: 'userInfo',
-        component: () => import('@/views/user/info')
+        component: () => import('../views/user/info')
       },
 
     ]

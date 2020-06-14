@@ -1,14 +1,14 @@
 import Vue from 'vue'
-import router from '@/router'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
+import router from '../../router'
+import { getToken, setToken, removeToken } from '../../utils/auth'
+import { resetRouter } from '../../router'
 import { message } from 'ant-design-vue'
 import {
     loginAPI,
     registerAPI,
     getUserInfoAPI,
     updateUserInfoAPI,
-} from '@/api/user'
+} from '../../api/user'
 
 const getDefaultState = () => {
     return {
@@ -56,8 +56,10 @@ const user = {
             if(res){
                 setToken(res.id)
                 commit('set_userId', res.id)
-                dispatch('getUserInfo')
-                router.push('/hotel/hotelList')
+                router.push('/story/content')
+                message.success('登录成功')
+            }else {
+                message.success('登录失败')
             }
         },
         register: async({ commit }, data) => {
