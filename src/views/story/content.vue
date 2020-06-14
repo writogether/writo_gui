@@ -9,7 +9,7 @@
                     <span class="value">{{ currentStoryContentParams.content }}</span>
                 </div>
                 <div class="items-recreate">
-                    <p style="text-align:right;"><button class="button"><li v-for="fatherId in storyParams">
+                    <p style="text-align:right;"><button class="button"><li v-for="fatherId in storyParams" :key="fatherId">
                         {{storyParams.title}}
                     </li></button></p>
                 </div>

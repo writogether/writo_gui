@@ -47,7 +47,9 @@
 </template>
 
 <script>
-    
+
+    import {mapActions, mapGetters} from 'vuex';
+
 export default {
     name: 'info',
     data(){
@@ -55,7 +57,7 @@ export default {
             modify: false,
             formLayout: 'horizontal',
             pagination: {},
-            columns,
+            // columns,
             data: [],
             form: this.$form.createForm(this, { name: 'coordinated' }),
         }
@@ -125,5 +127,5 @@ export default {
     }
 </style>
 <style lang="less">
-    
+
 </style>
