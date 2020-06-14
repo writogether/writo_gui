@@ -26,10 +26,10 @@
             <a-input
               size="large"
               type="text"
-              placeholder="手机号"
+              placeholder="用户名"
               v-decorator="[
                 'username',
-                {rules: [{ required: true, message: '手机号' }], validateTrigger: 'blur'}
+                {rules: [{ required: true, message: '用户名' }], validateTrigger: 'blur'}
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -56,7 +56,7 @@
               type="primary"
               class="login-button"
               :loading="loginLoading"
-              @click="handlelogin()"
+              @click="handlelogin"
             >确定</a-button>
           </a-form-item>
         </a-tab-pane>
@@ -78,7 +78,7 @@
               placeholder="手机号"
               v-decorator="[
               'registerPhoneNumber', 
-              {rules: [{ required: true, message: '请输入手机号' }], validateTrigger: 'blur'}]">
+              {rules: [{ required: true, message: '请输入手机号' }, { validator: this.checkPhoneNumber }], validateTrigger: 'blur'}]">
               <a-icon slot="prefix" type="book" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
           </a-form-item>
@@ -110,7 +110,7 @@
               type="primary"
               class="login-button"
               :loading="registerLoading"
-              @click="handleRegister()"
+              @click="handleRegister"
             >确定</a-button>
           </a-form-item>
         </a-tab-pane>
@@ -159,16 +159,7 @@ export default {
       ]),
 
     // handler
-    handleUsername (rule, value, callback) {
-      //const { state } = this
-      const regex = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/
-      if (regex.test(value)) {
-        callback()
-      } else {
-        callback(new Error('请输入有效用户名'))
-      }
-      callback()
-    },
+
     checkPhoneNumber(rule, value, callback) {
         const re = /^1[0-9]{10}$/
         if (re.test(value)) {
@@ -204,8 +195,8 @@ export default {
         if(!err){
           this.loginLoading = true
           const data = {
-            phoneNumber: this.form.getFieldValue("username"),
-            password: this.form.getFieldValue("password")
+            username: this.form.getFieldValue('username'),
+            password: this.form.getFieldValue('password')
           }
           await this.login(data)
           this.loginLoading = false
