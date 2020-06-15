@@ -6,12 +6,12 @@
         </div>
         <a-menu v-model="current" mode="horizontal" theme="light">
             <a-menu-item key="1" @click="selectMenu">
-                <router-link to="/hotel/hotelList">
-                    <a-icon type="home" />"首页-Write_Together"
+                <router-link to="/story/storyList">
+                    <a-icon type="home" />首页
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="2" @click="jumpToUserInfo" v-if="userInfo.userType=='Client'">
-                <a-icon type="user" />个人中心
+            <a-menu-item key="2" @click="jumpToMyStory">
+                <a-icon type="user" />我的创作
             </a-menu-item>
         </a-menu>
         <div class="logout">
@@ -61,10 +61,6 @@ export default {
             this.current = ['1']
         }else if(this.$route.name == 'userInfo') {
             this.current = ['2']
-        }else if(this.$route.name == 'manage') {
-            this.current = ['3']
-        }else {
-            this.current = ['4']
         }
     },
     methods: {
@@ -80,8 +76,8 @@ export default {
             await this.$store.dispatch('logout')
             this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         },
-        jumpToUserInfo() {
-            this.$router.push({ name: 'userInfo', params: { userId: this.userId } })
+        jumpToMyStory() {
+            this.$router.push({ name: 'myStory', params: { userId: this.userId } })
         },
         jumpToHome() {
 

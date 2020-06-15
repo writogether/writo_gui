@@ -1,5 +1,5 @@
 import router, {resetRouter} from '../../router';
-import {removeToken} from '../../utils/auth';
+import { getToken, setToken, removeToken } from '../../utils/auth'
 import {message} from 'ant-design-vue';
 import {getUserInfoAPI, loginAPI, registerAPI, updateUserInfoAPI} from '../../api/user';
 
@@ -40,7 +40,9 @@ const user = {
     actions: {
         login: async ({dispatch, commit}, userData) => {
             const res = await loginAPI(userData);
-            router.push('/story/content');
+            setToken(res.id)
+                router.push('/story/storyList');
+
         },
         register: async ({commit}, data) => {
             const res = await registerAPI(data);

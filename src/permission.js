@@ -1,6 +1,6 @@
 import router from './router'
 import store from './store'
-import { getToken } from '@/utils/auth'
+import { getToken } from './utils/auth'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 const whiteList = ['/login'] // no redirect whitelist
@@ -10,6 +10,7 @@ router.beforeEach(async(to, from, next) => {
     // determine whether the user has logged in
     const hasToken = getToken()
     if (hasToken) {
+
         store.commit('set_userId', hasToken)
       if (to.path === '/login') {
         // if is logged in, redirect to the home page

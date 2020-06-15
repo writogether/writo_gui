@@ -2,7 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import {VueAxios} from './axios';
 import {message, notification} from 'ant-design-vue';
-import store from '@/store';
+import store from '../store';
 
 // 创建 axios 实例
 const service = axios.create({
@@ -50,7 +50,7 @@ service.interceptors.response.use((response) => {
         case 200:
             if (response.data.success) {
                 if (response.data.message) message.success(response.data.message);
-                return response.data.content;
+                return response.data.data;
             }
             message.error(response.data.message);
             break;

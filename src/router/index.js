@@ -14,22 +14,17 @@ const routes = [
   },
   {
     path: '/home',
-    name: 'layout',
-    redirect: '/page',
+    name: 'home',
+    redirect: '/story/storyList',
     component: ()=> import('../views/layout'),
     children:[
       {
-        path:'/story/content',
-        name:'storyContent',
-        component: () => import('../views/story/content.vue')
+        path:'/story/storyList',
+        name:'storyList',
+        component: () => import('../views/story/storyList')
       },
       // eslint-disable-next-line no-mixed-spaces-and-tabs
 
-      {
-        path: '/user/info/:userId',
-        name: 'userInfo',
-        component: () => import('../views/user/info')
-      },
 
     ]
 
