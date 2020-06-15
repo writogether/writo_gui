@@ -3,9 +3,11 @@ import {
     recreateAPI,
 } from '@/api/story'
 import { message } from 'ant-design-vue'
+import {getAllStoryAPI} from "../../api/story";
 
 const story = {
     state: {
+        storyList:[],
         recreateList: [
         ],
         Visible: false,
@@ -23,9 +25,16 @@ const story = {
         ]
     },
     mutations: {
+        set_storyList:function (state,data) {
+            state.storyList=data
+        }
 
     },
     actions: {
+        getStoryList:async ({state,commit})=>{
+            const res=await getAllStoryAPI()
+            commit('set_storyList',res)
+        }
 
     }
 }
