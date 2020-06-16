@@ -24,11 +24,21 @@ const routes = [
         component: () => import('../views/story/storyList')
       },
       // eslint-disable-next-line no-mixed-spaces-and-tabs
-
-
     ]
-
   },
+  {
+    path: '/recreate',
+    name: 'write',
+    redirect: '/story/recreate',
+    component: () => import('../views/layout'),
+    children: [
+      {
+        path:'/story/recreate',
+        name:'write',
+        component:()=>import('../views/story/recreate')
+      }
+    ]
+  }
 ]
 const createRouter = () => new VueRouter({
   // mode: 'history', // require service support
