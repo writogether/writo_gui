@@ -8,6 +8,42 @@ export function getAllStoryAPI() {
         method: 'GET',
     })
 }
+export function getSuspenseAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Suspense`,
+        method: 'GET',
+    })
+}
+export function getAdventureAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Adventure`,
+        method: 'GET',
+    })
+}
+export function getOtherAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Other`,
+        method: 'GET',
+    })
+}
+export function getHorrorAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Horror`,
+        method: 'GET',
+    })
+}
+export function getRomanticAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Romantic`,
+        method: 'GET',
+    })
+}
+export function getFunnyAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Funny`,
+        method: 'GET',
+    })
+}
 export function getStoryContentAPI() {
     return axios({
         url: `${api.storyPre}/content`,
