@@ -8,8 +8,7 @@ import {
     getAllStoryAPI, getFunnyAPI, getHorrorAPI,
     getOtherAPI,
     getRomanticAPI,
-    getStoryByTypeAPI,
-    getSuspenseAPI
+    getSuspenseAPI, uploadNewStoryAPI
 } from "../../api/story";
 
 const story = {
@@ -68,6 +67,12 @@ const story = {
         },
         getFunny:async ({state,commit,data})=> {
             const res=await getFunnyAPI();commit('set_storyList',res)
+        },
+        uploadStory:async ({state,commit},data)=>{
+            const res=await uploadNewStoryAPI(data);
+            commit('getStoryList');
+            commit('set_quickCreateModalVisible', false);
+
         }
     }
 }

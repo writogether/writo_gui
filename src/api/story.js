@@ -44,6 +44,14 @@ export function getFunnyAPI() {
         method: 'GET',
     })
 }
+export function uploadNewStoryAPI(data) {
+    return axios({
+        url:`${api.storyPre}/upload`,
+        method:'POST',
+        data
+    })
+
+}
 export function getStoryContentAPI() {
     return axios({
         url: `${api.storyPre}/content`,
