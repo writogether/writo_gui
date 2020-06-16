@@ -4,16 +4,18 @@
             <img src="@/assets/logo.svg" class="logo" alt="logo" @click="jumpToHome">
             <span class="title">Write Together</span>
         </div>
+        <div >
         <a-menu v-model="current" mode="horizontal" theme="light">
-            <a-menu-item key="1" @click="selectMenu">
+            <a-menu-item key="1" @click="selectMenu" style="font-size: large">
                 <router-link to="/story/storyList">
                     <a-icon type="home" />首页
                 </router-link>
             </a-menu-item>
-            <a-menu-item key="2" @click="jumpToMyStory">
+            <a-menu-item key="2" @click="jumpToMyStory" style="font-size: large">
                 <a-icon type="user" />我的创作
             </a-menu-item>
         </a-menu>
+        </div>
         <div class="logout">
             <a-dropdown placement="bottomCenter">
                 <div class="user">
@@ -57,9 +59,9 @@ export default {
         ])
     },
     mounted() {
-        if (this.$route.name == 'home') {
+        if (this.$route.name === 'home') {
             this.current = ['1']
-        }else if(this.$route.name == 'userInfo') {
+        }else if(this.$route.name === 'myStory') {
             this.current = ['2']
         }
     },
