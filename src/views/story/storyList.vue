@@ -1,29 +1,37 @@
 <template>
     <div class="storyList">
-        <div class="search_card">
-        <span >选择故事类型：</span>
+        <div>
+            <div class="start_button" >
+                <a-button @click="write" size="large" type="primary" shape="round">
+                    <a-icon type="plus"/>
+                    创作你的新故事！
+                </a-button>
+            </div>
+            <div class="search_card">
+            <span >选择故事类型：</span>
+            <a-select v-model="storyType"
+                v-decorator="[
+                'storyType',
+                { rules: [{ required: true, message: '请选择故事类型' }] }]"
+                @change="changeStoryType"
 
-        <a-select v-model="storyType"
-            v-decorator="[
-            'storyType',
-            { rules: [{ required: true, message: '请选择故事类型' }] }]"
-            @change="changeStoryType"
-
-        >
-            <a-select-option value='0'>All Stories</a-select-option>
-            <a-select-option value='1'>Adventure</a-select-option>
-            <a-select-option value='2'>Romantic</a-select-option>
-            <a-select-option value='3'>Suspense</a-select-option>
-            <a-select-option value='4'>Other</a-select-option>
-            <a-select-option value='5'>Horror</a-select-option>
-            <a-select-option value='6'>Funny</a-select-option>
-        </a-select>
+            >
+                <a-select-option value='0'>All Stories</a-select-option>
+                <a-select-option value='1'>Adventure</a-select-option>
+                <a-select-option value='2'>Romantic</a-select-option>
+                <a-select-option value='3'>Suspense</a-select-option>
+                <a-select-option value='4'>Other</a-select-option>
+                <a-select-option value='5'>Horror</a-select-option>
+                <a-select-option value='6'>Funny</a-select-option>
+            </a-select>
+            </div>
             <a-divider></a-divider>
         </div>
+        <div class="table">
         <a-table
             :columns="columns_storyList"
             :dataSource="storyList"
-            size="small"
+            size="medium"
             bordered
         >
             <span slot="action" >
@@ -36,12 +44,8 @@
                 <button type="primary">❤ {{collect}}</button>
             </span>
         </a-table>
+        </div>
         <a-divider></a-divider>
-        <div class="start_button">
-        <a-button @click="write" size="large" block type="primary" shape="round">
-            现在开始创作你的新故事！
-        </a-button>
-         </div>
         <QuickCreateModal></QuickCreateModal>
     </div>
 </template>
@@ -149,15 +153,18 @@
 
 <style scoped lang="less">
     .storyList {
-        padding: 200px;
+        font-size: medium;
+        padding: 150px;
         position: center;
-        color-adjust: revert;
         .search_card{
             padding: 20px;
+            float: left;
         }
         .start_button{
-            padding: 50px;
+             float:right;
+             margin:20px 0;
         }
+
 
     }
 </style>
