@@ -23,16 +23,21 @@
             { rules: [{ required: true, message: '请选择故事类型' }] }]"
 
                 >
-                    <a-select-option value='1'>Adventure</a-select-option>
-                    <a-select-option value='2'>Romantic</a-select-option>
-                    <a-select-option value='3'>Suspense</a-select-option>
-                    <a-select-option value='4'>Other</a-select-option>
-                    <a-select-option value='5'>Horror</a-select-option>
-                    <a-select-option value='6'>Funny</a-select-option>
+                    <a-select-option value='0'>Adventure</a-select-option>
+                    <a-select-option value='1'>Romantic</a-select-option>
+                    <a-select-option value='2'>Suspense</a-select-option>
+                    <a-select-option value='3'>Other</a-select-option>
+                    <a-select-option value='4'>Horror</a-select-option>
+                    <a-select-option value='5'>Funny</a-select-option>
                 </a-select>
             </a-form-item>
             <a-divider>开始你的创作吧！</a-divider>
-                <a-textarea class="text" rows="10" />
+            <a-textarea
+                class="text" rows="10"
+                v-decorator="['content', { rules: [{ required: true, message: 'write together!' }] }]"
+            >
+
+            </a-textarea>
 
 
 
@@ -65,6 +70,7 @@
         computed:{
             ...mapGetters([
                 'quickCreateModalVisible',
+                'userId'
             ])
         },
         beforeCreate() {
@@ -75,7 +81,7 @@
                 'set_quickCreateModalVisible'
             ]),
             ...mapActions([
-
+                'uploadStory'
             ]),
             cancel(){
                 this.set_quickCreateModalVisible(false);
@@ -85,8 +91,13 @@
                 this.form.validateFieldsAndScroll((err, values) => {
                     if (!err) {
                         const data={
-
+                            fatherId:0,
+                            authorId:this.userId,
+                            title:this.form.getFieldValue('title'),
+                            content:this.form.getFieldValue('content'),
+                            tag:this.form.getFieldValue('storyType')
                         }
+                        this.uploadStory(data)
                     }
                 });
             }
