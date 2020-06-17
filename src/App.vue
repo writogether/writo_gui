@@ -4,11 +4,11 @@
       <router-view/>
     </transition>
   </div>
+
 </template>
 <script>
 export default {
   components: {
-    
   }
 }
 </script>
@@ -20,7 +20,7 @@ export default {
   color: #2c3e50;
   width: 100%;
   padding: 180px 150px 150px;
-  background: #f0f2f5 url('assets/backGround.jpg') ;
+  background: #f0f2f5 url('assets/backGround.jpg')  center;
 
 }
 
