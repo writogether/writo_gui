@@ -6,8 +6,7 @@ import {getUserInfoAPI, loginAPI, registerAPI, updateUserInfoAPI} from '../../ap
 const getDefaultState = () => {
     return {
         userId: '',
-        userInfo: {},
-        userOrderList: [],
+        userInfo: {}
     };
 };
 
@@ -68,10 +67,9 @@ const user = {
                 ...data,
             };
             const res = await updateUserInfoAPI(params);
-            if (res) {
                 message.success('修改成功');
                 dispatch('getUserInfo');
-            }
+
         },
         logout: async ({commit}) => {
             removeToken();
