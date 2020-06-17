@@ -26,6 +26,21 @@ const routes = [
       // eslint-disable-next-line no-mixed-spaces-and-tabs
     ]
   },
+
+  {
+    path: '/home',
+    name: 'home',
+    redirect: '/user/info',
+    component: ()=> import('../views/layout'),
+    children:[
+      {
+        path:'/user/info',
+        name:'info',
+        component: () => import('../views/user/info')
+      },
+
+    ]
+  },
   {
     path: '/recreate',
     name: 'write',
