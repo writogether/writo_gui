@@ -1,11 +1,9 @@
 <template>
     <div class="header">
         <div class="label">
-            <img src="@/assets/logo.svg" class="logo" alt="logo" @click="jumpToHome">
-            <span class="title">Write Together</span>
         </div>
         <div >
-        <a-menu v-model="current" mode="horizontal" theme="light">
+        <a-menu v-model="current" mode="horizontal" theme="dark">
             <a-menu-item key="1" @click="selectMenu" style="font-size: large">
                 <router-link to="/story/storyList">
                     <a-icon type="home" />首页
@@ -49,7 +47,8 @@ export default {
     name: '',
     data() {
         return {
-            current: ['1']
+            current: ['1'],
+            imgSrc:require('../assets/backGround.jpg')
         }
     },
     computed: {
@@ -104,7 +103,6 @@ export default {
             .logo {
             height: 44px;
             vertical-align: top;
-            margin-right: 16px;
             border-style: none;
             cursor: pointer;
           }

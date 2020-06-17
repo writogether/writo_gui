@@ -2,10 +2,7 @@
   <div class="main">
       <div class="top">
         <div class="header">
-          <div>
-            <!-- <img src="@/assets/logo.svg" class="logo" alt="logo"> -->
-            <span class="title">Write Together</span>
-          </div>
+
         </div>
         <div class="desc">
         </div>
@@ -18,10 +15,10 @@
     >
       <a-tabs
         :activeKey="customActiveKey"
-        :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
+        :tabBarStyle="{  textAlign: 'center', borderBottom: 'unset' }"
         @change="handleTabClick"
       >
-        <a-tab-pane key="tab1" tab="账号密码登录">
+        <a-tab-pane key="tab1" tab="账号密码登录" >
           <a-form-item>
             <a-input
               size="large"
@@ -59,6 +56,7 @@
               @click="handlelogin"
             >确定</a-button>
           </a-form-item>
+          <a-form-item><a-divider>write together!</a-divider></a-form-item>
         </a-tab-pane>
 
         <a-tab-pane key="tab2" tab="注册新账号">
@@ -113,6 +111,7 @@
               @click="handleRegister"
             >确定</a-button>
           </a-form-item>
+          <a-form-item><a-divider>write together!</a-divider></a-form-item>
         </a-tab-pane>
       </a-tabs>
     </a-form>
@@ -122,10 +121,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import AFormItem from "ant-design-vue/es/form/FormItem";
 
 export default {
   name: 'login',
   components: {
+    AFormItem
     
   },
   data () {
@@ -234,8 +235,8 @@ export default {
 <style lang="less" scoped>
 
 .main{
-    min-width: 260px;
-    width: 368px;
+    min-width: 500px;
+    width: 500px;
     margin: 100px auto;
     .top {
         text-align: center;
@@ -279,6 +280,7 @@ export default {
       }
 }
 .user-layout-login {
+  padding: 80px 0px;
   label {
     font-size: 14px;
   }

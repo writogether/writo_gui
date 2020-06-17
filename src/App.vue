@@ -19,9 +19,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   width: 100%;
-  padding: 20px 100px 144px;
-  background: #f0f2f5 url('assets/background.svg') repeat 100%;
-  min-height: 800px
+  padding: 180px 150px 150px;
+  background: #f0f2f5 url('assets/backGround.jpg') ;
+
 }
 
 #nav {
