@@ -17,7 +17,14 @@
                                 v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' }] }]"
                                 v-if="modify"
                         />
-                   </a-form-item>
+                    </a-form-item>
+                    <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
+                        <a-input
+                                placeholder="请填写个人介绍"
+                                v-decorator="['description', { rules: [{ required: true, message: '请输入个人介绍' }] }]"
+                                v-if="modify"
+                        />
+                    </a-form-item>
             <!--         <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
                         <a-input
                                 placeholder="请输入原密码"
