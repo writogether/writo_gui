@@ -23,10 +23,11 @@
             <a-icon type="plus"/>
             创作你的新故事！
         </a-button></div>
-        <div class="table">
+        <div class="table" >
         <a-table
             :columns="columns_storyList"
             :dataSource="storyList"
+            :pagination="pagination"
             bordered
         >
             <span slot="action" >
@@ -83,7 +84,10 @@
                 dislike_count:0,
                 collect:0,
                 columns_storyList,
-                storyType:'All Stories'
+                storyType:'All Stories',
+                pagination:{
+                    pageSize:6
+                }
             }
         },
         async mounted(){
