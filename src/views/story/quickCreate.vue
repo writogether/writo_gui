@@ -81,7 +81,8 @@
                 'set_quickCreateModalVisible'
             ]),
             ...mapActions([
-                'uploadStory'
+                'uploadStory',
+                'getStoryList'
             ]),
             cancel(){
                 this.set_quickCreateModalVisible(false);

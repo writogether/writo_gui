@@ -31,13 +31,13 @@
             bordered
         >
             <span slot="action" >
-                <button type="primary">👍 {{like_count}}</button>
+                <a-button type="ghost">👍 {{like_count}}</a-button>
             </span>
             <span slot="action" >
-                <button type="danger">👎 {{dislike_count}}</button>
+                <a-button type="ghost">👎 {{dislike_count}}</a-button>
             </span>
             <span slot="action" >
-                <button type="primary">❤ {{collect}}</button>
+                <a-button type="ghost">❤ {{collect}}</a-button>
             </span>
         </a-table>
         </div>
@@ -90,8 +90,8 @@
                 }
             }
         },
-        async mounted(){
-            await this.getStoryList()
+         mounted(){
+             this.getStoryList()
             console.log(this.storyList)
         },
         computed:{
@@ -153,7 +153,6 @@
 
 <style scoped lang="less">
     .storyList {
-        font-size: medium;
         border-radius: 10px;
         padding: 6px 6px;
         position: center;

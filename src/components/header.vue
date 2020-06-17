@@ -88,6 +88,7 @@ export default {
 </script>
 <style scoped lang="less">
     .header {
+        position:center;
         display: flex;
         line-height: 44px;
         height: 44px;
@@ -138,7 +139,8 @@ export default {
 <style lang="less">
     .header {
         .ant-menu {
-            background: none
+
+            background-color: white;
         }
     }
 </style>

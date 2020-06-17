@@ -70,7 +70,6 @@ const story = {
         },
         uploadStory:async ({state,commit},data)=>{
             const res=await uploadNewStoryAPI(data);
-            commit('getStoryList');
             commit('set_quickCreateModalVisible', false);
 
         }
