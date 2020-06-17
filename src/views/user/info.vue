@@ -17,8 +17,8 @@
                                 v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' }] }]"
                                 v-if="modify"
                         />
-                    </a-form-item>
-                    <a-form-item label="密码" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }" v-if="modify">
+                   </a-form-item>
+            <!--         <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
                         <a-input
                                 placeholder="请输入原密码"
                                 v-decorator="['password', { rules: [{ required: true, message: '请输入新密码' }] }]"
@@ -30,6 +30,7 @@
                                 v-decorator="['password', { rules: [{ required: true, message: '请输入新密码' }] }]"
                         />
                     </a-form-item>
+                    -->
                     <a-form-item :wrapper-col="{ span: 12, offset: 5 }" v-if="modify">
                         <a-button type="primary" @click="saveModify">
                             保存
@@ -79,15 +80,16 @@ export default {
     methods: {
         ...mapActions([
             'getUserInfo',
+            'updateUserInfo'
         ]),
         saveModify() {
             this.form.validateFields((err, values) => {
                 if (!err) {
                     const data = {
-                        userName: this.form.getFieldValue('userName'),
+                        username: this.form.getFieldValue('userName'),
                         phoneNumber: this.form.getFieldValue('phoneNumber'),
-                        password: this.form.getFieldValue('password')
-                    }
+                        description:this.form.getFieldValue('userDescription')
+                    };
                     this.updateUserInfo(data).then(()=>{
                         this.modify = false
                     })
@@ -97,7 +99,7 @@ export default {
         modifyInfo() {
             setTimeout(() => {
                 this.form.setFieldsValue({
-                    'userName': this.userInfo.userName,
+                    'userName': this.userInfo.username,
                     'phoneNumber': this.userInfo.phoneNumber,
                 })
             }, 0)
