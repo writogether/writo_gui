@@ -22,10 +22,6 @@
                     <a-icon style="margin-left: 3px; font-size: 16px" type="down"></a-icon>
                 </div>
                 <a-menu slot="overlay">
-                <a-menu-item  @click="jumpToHome()">
-                    <a-icon type="home"></a-icon>
-                    首页
-                </a-menu-item>
                 <a-menu-item @click="jumpToUserInfo()">
                     <a-icon type="profile"></a-icon>
                     个人信息
@@ -80,8 +76,8 @@ export default {
         jumpToMyStory() {
             this.$router.push({ name: 'myStory', params: { userId: this.userId } })
         },
-        jumpToHome() {
-
+        jumpToUserInfo(){
+            this.$router.push({ name: 'info', params: { userInfo: this.userInfo } })
         }
     }
 }
