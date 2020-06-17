@@ -3,7 +3,7 @@
         <div class="label">
         </div>
         <div >
-        <a-menu v-model="current" mode="horizontal" theme="dark">
+        <a-menu v-model="current" mode="horizontal" theme="light">
             <a-menu-item key="1" @click="selectMenu" style="font-size: large">
                 <router-link to="/story/storyList">
                     <a-icon type="home" />首页
