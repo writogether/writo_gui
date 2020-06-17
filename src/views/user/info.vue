@@ -86,8 +86,8 @@ export default {
     },
     methods: {
         ...mapActions([
-            'getUserInfo',
-            'updateUserInfo'
+            'search',
+            'update'
         ]),
         saveModify() {
             this.form.validateFields((err, values) => {
