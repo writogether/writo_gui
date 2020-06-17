@@ -1,14 +1,8 @@
 <template>
+    <div style="padding-top: 150px;padding-left:180px;padding-right: 180px">
     <div class="storyList">
-        <div>
-            <div class="start_button" >
-                <a-button @click="write" size="large" type="primary" shape="round">
-                    <a-icon type="plus"/>
-                    创作你的新故事！
-                </a-button>
-            </div>
-            <div class="search_card">
-            <span >选择故事类型：</span>
+        <div style="background: #ffffff;padding: 30px 40px;border-top-left-radius: 10px;border-top-right-radius: 10px">
+            <span style="font-size: large ">选择故事类型：</span>
             <a-select v-model="storyType"
                 v-decorator="[
                 'storyType',
@@ -24,14 +18,15 @@
                 <a-select-option value='5'>Horror</a-select-option>
                 <a-select-option value='6'>Funny</a-select-option>
             </a-select>
-            </div>
-            <a-divider></a-divider>
-        </div>
+
+        <a-button  @click="write" size="large" type="primary" shape="round" style="float: right">
+            <a-icon type="plus"/>
+            创作你的新故事！
+        </a-button></div>
         <div class="table">
         <a-table
             :columns="columns_storyList"
             :dataSource="storyList"
-            size="medium"
             bordered
         >
             <span slot="action" >
@@ -45,8 +40,8 @@
             </span>
         </a-table>
         </div>
-        <a-divider></a-divider>
         <QuickCreateModal></QuickCreateModal>
+    </div>
     </div>
 </template>
 
@@ -141,6 +136,7 @@
                 }
             },
 
+
             write(){
                 this.set_quickCreateModalVisible(true);
             }
@@ -154,15 +150,17 @@
 <style scoped lang="less">
     .storyList {
         font-size: medium;
-        padding: 150px;
+        border-radius: 10px;
+        padding: 6px 6px;
         position: center;
-        .search_card{
-            padding: 20px;
-            float: left;
-        }
-        .start_button{
-             float:right;
-             margin:20px 0;
+        background-color:#313c5b;
+
+        .table{
+            background: #f0f2f5;
+            padding: 40px 20px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+
         }
 
 
