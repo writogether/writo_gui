@@ -68,7 +68,7 @@ const user = {
             };
             const res = await updateUserInfoAPI(params);
                 message.success('修改成功');
-                dispatch('getUserInfo');
+                dispatch('search');
 
         },
         logout: async ({commit}) => {
