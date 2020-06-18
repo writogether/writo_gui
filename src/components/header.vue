@@ -90,12 +90,11 @@ export default {
         height: 44px;
         align-items: center;
         justify-content: space-between;
-        min-width: 800px;
         .label{
             height: 44px;
             line-height: 44px;
             vertical-align: middle;
-            min-width: 400px;
+            min-width: 350px;
 
             .logo {
             height: 44px;
@@ -135,7 +134,6 @@ export default {
 <style lang="less">
     .header {
         .ant-menu {
-
             background-color: white;
         }
     }

@@ -32,9 +32,8 @@
                 </a-select>
             </a-form-item>
             <a-divider>开始你的创作吧！</a-divider>
-            <a-textarea
+            <a-textarea id="content"
                 class="text" rows="10"
-                v-decorator="['content', { rules: [{ required: true, message: 'write together!' }] }]"
             >
 
             </a-textarea>
@@ -65,6 +64,8 @@
                     },
                 },
                 storyType:'Adventure',
+                title:'',
+                content:'',
             }
         },
         computed:{
@@ -95,9 +96,10 @@
                             fatherId:0,
                             authorId:this.userId,
                             title:this.form.getFieldValue('title'),
-                            content:this.form.getFieldValue('content'),
+                            content:document.getElementById('content').value,
                             tag:this.form.getFieldValue('storyType')
                         }
+                        console.log(data)
                         this.uploadStory(data)
                     }
                 });

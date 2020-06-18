@@ -1,7 +1,7 @@
 <template>
-    <div style="padding-top: 150px;padding-left:180px;padding-right: 180px">
+    <div style="padding: 100px 200px;">
     <div class="storyList">
-        <div style="background: #ffffff;padding: 30px 40px;border-top-left-radius: 10px;border-top-right-radius: 10px">
+        <div style="background: #ffffff;padding: 20px 40px;border-top-left-radius: 10px;border-top-right-radius: 10px">
             <span style="font-size: large ">选择故事类型：</span>
             <a-select v-model="storyType"
                 v-decorator="[
@@ -19,7 +19,7 @@
                 <a-select-option value='6'>Funny</a-select-option>
             </a-select>
 
-        <a-button  @click="write" size="large" type="primary" shape="round" style="float: right">
+        <a-button  @click="write" size="large"  shape="round" style="float: right">
             <a-icon type="plus"/>
             创作你的新故事！
         </a-button></div>
@@ -30,14 +30,8 @@
             :pagination="pagination"
             bordered
         >
-            <span slot="action" >
-                <a-button type="ghost">👍 {{like_count}}</a-button>
-            </span>
-            <span slot="action" >
-                <a-button type="ghost">👎 {{dislike_count}}</a-button>
-            </span>
-            <span slot="action" >
-                <a-button type="ghost">❤ {{collect}}</a-button>
+            <span slot="action" slot-scope="record">
+                <a-button style="background-color:aliceblue;color: #313c5b" shape="round" @click="writogether(record)">WriTogether!</a-button>
             </span>
         </a-table>
         </div>
@@ -51,12 +45,14 @@
     import QuickCreateModal from './quickCreate'
     const columns_storyList=[
         {
-            title:'id',
-            dataIndex:'id',
+            title:'热度',
+            dataIndex:'popularity',
+            width:'10%',
         },
         {
             title:'标题',
             dataIndex:'title',
+            width:'40%'
         },
         {
             title:'续写者',
@@ -67,7 +63,10 @@
             dataIndex:'tag'
         },
         {
-            title: '操作',
+            title:'续次',
+            dataIndex:'depth'
+        },
+        {
             key: 'action',
             scopedSlots: { customRender: 'action' },
         },
@@ -85,6 +84,7 @@
                 collect:0,
                 columns_storyList,
                 storyType:'All Stories',
+                popularity:0,
                 pagination:{
                     pageSize:6
                 }
@@ -143,7 +143,18 @@
 
             write(){
                 this.set_quickCreateModalVisible(true);
+            },
+            writogether(record){
+                console.log(record)
+                this.$router.push({
+                    path:'/storyContent',
+                    name:'content',
+                    params:{
+                        id:record.id
+                    }
+                })
             }
+
         },
 
 
@@ -155,7 +166,7 @@
     .storyList {
         border-radius: 10px;
         padding: 6px 6px;
-        position: center;
+        position: static;
         background-color:#313c5b;
 
         .table{

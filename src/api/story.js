@@ -52,9 +52,15 @@ export function uploadNewStoryAPI(data) {
     })
 
 }
-export function getStoryContentAPI() {
+export function getStoryByIdAPI(id) {
     return axios({
-        url: `${api.storyPre}/content`,
+        url: `${api.storyPre}/storyInfo/${id}`,
+        method: 'GET',
+    })
+}
+export function getStoryContentAPI(id) {
+    return axios({
+        url: `${api.storyPre}/content/${id}`,
         method: 'GET',
     })
 }

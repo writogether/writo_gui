@@ -7,7 +7,7 @@ import {
     getAdventureAPI,
     getAllStoryAPI, getFunnyAPI, getHorrorAPI,
     getOtherAPI,
-    getRomanticAPI,
+    getRomanticAPI, getStoryByIdAPI,
     getSuspenseAPI, uploadNewStoryAPI
 } from "../../api/story";
 
@@ -21,14 +21,12 @@ const story = {
             id:'',
             fatherId:'',
             title:'',
+            tag:'',
+            depth:'',
+            popularity:'',
+            storyContent:'',
         },
-        storyContentParams:{
-            id:'',
-            content:''
-        },
-        currentStoryInfo:[
 
-        ],
         quickCreateModalVisible:false,
     },
     mutations: {
@@ -37,6 +35,20 @@ const story = {
         },
         set_quickCreateModalVisible:function (state,data) {
             state.quickCreateModalVisible=data
+        },
+        set_currentStoryId:function (state,data) {
+            console.log(data)
+            state.storyParams.id=data;
+        },
+        set_storyParams:function (state, data) {
+            state.storyParams.fatherId=data.fatherId;
+            state.storyParams.title=data.title;
+            state.storyParams.tag=data.tag;
+            state.storyParams.popularity=data.popularity;
+            state.storyParams.depth=data.depth;
+        },
+        set_storyContent:function (state, data) {
+            state.storyParams.storyContent=data.content;
         }
 
     },
@@ -71,7 +83,14 @@ const story = {
         uploadStory:async ({state,commit},data)=>{
             const res=await uploadNewStoryAPI(data);
             commit('set_quickCreateModalVisible', false);
-
+        },
+        getStoryById:async ({state,commit},data)=>{
+            const res=await getStoryByIdAPI(data);
+            commit('set_storyParams',res);
+        },
+        getContentById:async ({state,commit},data)=>{
+            const res=await getStoryContentAPI(data);
+            commit('set_storyContent',res);
         }
     }
 }
