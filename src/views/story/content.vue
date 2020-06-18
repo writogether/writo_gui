@@ -1,8 +1,9 @@
 <template>
+    <div style="padding-top: 195px ;width:75%;margin: 0 auto">
     <div class="content">
         <a-layout class="a_layout">
             <a-layout-content class="story_board">
-                <div class="items" style="font-size: 30px;text-align: center;padding-top: 30px">
+                <div class="items" style="font-size: 30px;text-align: center;padding-top: 20px">
                     <span class="value">{{ storyParams.title }}</span>
                 </div>
                 <a-divider></a-divider>
@@ -16,13 +17,21 @@
                     </li></button></p>
                 </div>
                 -->
-                <a-divider></a-divider>
-                <h3><strong><span style="color:blue;font-weight:bold">发表评论</span></strong></h3>
-                <p><textarea rows="10" cols="90" class="text-area" placeholder="在此发表"></textarea></p>
-                <p style="text-align:right;"><button class="button">发表</button></p>
+                <div style="padding-bottom: 30px"></div>
             </a-layout-content>
        </a-layout>
    </div>
+        <a-divider></a-divider>
+        <div class="content">
+            <a-layout class="a_layout">
+                <a-layout-content class="story_board">
+                    <h3 style="padding: 20px 0 "><span style="color:#313c5b;font-weight:bold;">发表评论</span></h3>
+                    <p><a-textarea rows="10" cols="90"  placeholder="在此发表"></a-textarea></p>
+                    <p style="text-align:right;"><a-button class="button">发表</a-button></p>
+                </a-layout-content>
+            </a-layout>
+        </div>
+</div>
 </template>
 <script>
     import { mapGetters, mapActions, mapMutations } from 'vuex'
@@ -62,12 +71,12 @@
             ])
         }
     }
-</script> <style scoped>
+</script>
+<style scoped>
     .content{
         background: none;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
-        padding: 220px 100px;
 
     }
     .a_layout{
@@ -77,15 +86,12 @@
     }
     .story_board{
         background: whitesmoke;
-        padding: 0px 100px;
+        padding: 10px 100px;
         border-radius: 20px;
 
     }
     .value{
         color: #313c5b;
-    }
-    .button{
-
     }
     .items{
         border-bottom-left-radius: 10px;
@@ -99,11 +105,5 @@
         height: 6.5rem ;
         word-wrap:break-word;
     }
-    .button{
-        background-color: #555555;
-        font-size: 16px;
-        width: 25px;
-        border-radius: 8px;
-        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    }
+
 </style>
