@@ -5,9 +5,7 @@ const getters = {
 	userInfo: state => state.user.userInfo,
     //story
     storyList:state=>state.story.storyList,
-    storyContent: state => state.story.storyContent,
-    recreateList: state => state.story.recreateList,
-    storyParams: state => state.user.storyParams,
+    storyParams: state => state.story.storyParams,
     quickCreateModalVisible:state=>state.story.quickCreateModalVisible,
 }
 

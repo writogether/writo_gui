@@ -21,10 +21,15 @@ const routes = [
       {
         path:'/story/storyList',
         name:'storyList',
-        component: () => import('../views/story/storyList')
+        component: () => import('../views/story/storyList'),
       },
       // eslint-disable-next-line no-mixed-spaces-and-tabs
     ]
+  },
+  {
+    path:'/storyContent',
+    name:'content',
+    component:()=>import('../views/story/content')
   },
 
   {
