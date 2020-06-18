@@ -64,9 +64,11 @@
                         </a-button>
                     </a-form-item>
                     <a-form-item :wrapper-col="{ span: 8, offset: 0 }" v-else>
+                        <div class="button">
                         <a-button type="primary" @click="modifyInfo">
                             修改信息
                         </a-button>
+                        </div>
                     </a-form-item>
                 </a-form-item>
             </a-tab-pane>
@@ -146,7 +148,10 @@ export default {
 </script>
 <style scoped lang="less">
     .info-wrapper {
-        padding: 50px;
+        padding: 150px 200px;
+        .button{
+            padding-top: 20px;
+        }
         .chart {
             display: flex;
             align-items: center;
@@ -154,14 +159,4 @@ export default {
             margin-top: 20px
         }
     }
-</style>
-<style lang="less">
-    .info-wrapper {
-        .ant-tabs-bar {
-            padding-left: 30px
-        }
-    }
-</style>
-<style lang="less">
-
 </style>

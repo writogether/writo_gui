@@ -1,5 +1,5 @@
 <template>
-    <div style="padding: 100px 200px;">
+    <div style="padding-top: 150px ;width:75%;margin: 0 auto">
     <div class="storyList">
         <div style="background: #ffffff;padding: 20px 40px;border-top-left-radius: 10px;border-top-right-radius: 10px">
             <span style="font-size: large ">选择故事类型：</span>
@@ -24,16 +24,20 @@
             创作你的新故事！
         </a-button></div>
         <div class="table" >
-        <a-table
-            :columns="columns_storyList"
-            :dataSource="storyList"
-            :pagination="pagination"
+        <a-list
+            :data-source="storyList"
             bordered
         >
-            <span slot="action" slot-scope="record">
-                <a-button style="background-color:aliceblue;color: #313c5b" shape="round" @click="writogether(record)">WriTogether!</a-button>
-            </span>
-        </a-table>
+            <a-list-item slot="renderItem" slot-scope="item">
+                <div style="width: 10%;text-align: center">热度{{item.popularity}}</div>
+                <div style="width: 40%;text-align: center">《{{ item.title }}》</div>
+                <div style="width: 10%;text-align: center"  v-if="item.depth>0">第{{item.depth}}续</div>
+                <div style="width: 10%;text-align: center" v-else>首篇</div>
+                <div style="width: 20%;text-align: center">{{item.tag}}</div>
+                <div style="width: 5%"></div>
+                <a-button  shape="round" size="small"  @click="writogether(item)">WriTogether!</a-button>
+            </a-list-item>
+        </a-list>
         </div>
         <QuickCreateModal></QuickCreateModal>
     </div>
@@ -164,6 +168,7 @@
 
 <style scoped lang="less">
     .storyList {
+
         border-radius: 10px;
         padding: 6px 6px;
         position: static;
