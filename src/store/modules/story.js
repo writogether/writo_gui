@@ -6,6 +6,7 @@ import {
     getOtherAPI,
     getRomanticAPI,
     getStoryByIdAPI,
+    getStoryByFatherAPI,
     getStoryContentAPI,
     getSuspenseAPI,
     uploadNewStoryAPI
@@ -15,8 +16,7 @@ import {sendCommentAPI,getCommentAPI} from"../../api/interact";
 const story = {
     state: {
         storyList:[],
-        recreateList: [
-        ],
+        recreateList: [],
         Visible: false,
         storyParams: {
             id:'',
@@ -36,6 +36,9 @@ const story = {
     mutations: {
         set_storyList:function (state,data) {
             state.storyList=data
+        },
+        set_recreateList:function (state,data) {
+            state.recreateList=data
         },
         set_quickCreateModalVisible:function (state,data) {
             state.quickCreateModalVisible=data
@@ -98,6 +101,10 @@ const story = {
         getStoryById:async ({state,commit},data)=>{
             const res=await getStoryByIdAPI(data);
             commit('set_storyParams',res);
+        },
+        getStoryByFather:async ({state,commit},data)=>{
+            const res=await getStoryByFatherAPI(data);
+            commit('set_recreateList',res);
         },
         getContentById:async ({state,commit},data)=>{
             const res=await getStoryContentAPI(data);

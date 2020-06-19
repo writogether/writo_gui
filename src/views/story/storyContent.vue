@@ -1,6 +1,6 @@
 <template>
     <div style="padding-top: 195px ;width:75%;margin: 0 auto">
-    <div class="content">
+        <div class="content">
         <a-layout class="a_layout">
             <a-layout-content class="story_board">
                 <div  style="font-size: 30px;text-align: center;padding-top: 20px">
@@ -23,9 +23,36 @@
                 <div style="padding-bottom: 30px"></div>
             </a-layout-content>
        </a-layout>
-   </div>
-
+    </div>
         <div style="padding: 40px 50px">
+            <div  v-if="storyParams.depth>0">
+            <p style="text-align: center">回溯前篇</p>
+            <a-row >
+                <a-col :span="12">
+                    <a-slider v-model="inputValue1" :min="0" :max="storyParams.depth"  />
+                </a-col>
+                <a-col :span="4">
+                    <a-input-number v-model="inputValue1" :min="0" :max="storyParams.depth"   />
+                </a-col>
+            </a-row>
+        </div>
+            <a-divider style="padding: 40px 0;text-align: center"><a-button  @click="set_find_recreate">寻找续篇</a-button></a-divider>
+            <div v-if="find_recreate">
+                <a-list
+                        :data-source="recreateList"
+                        :pagination="pagination"
+                        bordered
+                >
+                    <a-list-item slot="renderItem" slot-scope="item">
+                        <div style="width: 10%;text-align: center">热度{{item.popularity}}</div>
+                        <div style="width: 40%;text-align: center">《{{ item.title }}》</div>
+                        <div style="width: 10%;text-align: center">{{ item.userName }}</div>
+                        <div style="width: 15%;text-align: center">{{item.tag}}</div>
+                        <div style="width: 5%"></div>
+                        <a-button  shape="round" size="small"  @click="writogether(item)">WriTogether!</a-button>
+                    </a-list-item>
+                </a-list>
+            </div>
             <a-divider style="padding-bottom: 20px">评论区</a-divider>
             <div style="width:60%;float: left">
                 <a-list
@@ -45,8 +72,6 @@
                 <p style="text-align:right;"><a-button class="button" @click="Comment">发表</a-button></p>
             </div>
         </div>
-
-
 </div>
 </template>
 <script>
@@ -63,14 +88,17 @@
             return{
                 pagination:{
                     pageSize:6
-                }
+                },
+                inputValue1: 0,
+                find_recreate:false,
             }
         },
         computed:{
             ...mapGetters([
                 'storyParams',
                 'storyComments',
-                'userId'
+                'userId',
+                'recreateList'
             ])
         },
         mounted() {
@@ -79,6 +107,7 @@
             this.getStoryById(this.storyParams.id)
             this.getContentById(this.storyParams.id)
             this.getCommentById(this.storyParams.id)
+            this.inputValue1=Number(this.storyParams.depth)
             console.log(this.storyParams)
             console.log(this.storyComments)
         },
@@ -93,8 +122,17 @@
                 'getStoryById',
                 'getContentById',
                 'getCommentById',
-                'sendComment'
+                'sendComment',
+                'getStoryByFather'
             ]),
+            set_find_recreate(){
+                this.find_recreate=!this.find_recreate;
+
+                if(this.find_recreate){
+                    this.getStoryByFather(this.storyParams.id);
+                }
+            }
+            ,
             Comment(){
                 const data={
                     storyId:this.storyParams.id,
