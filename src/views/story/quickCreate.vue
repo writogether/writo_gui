@@ -23,12 +23,12 @@
             { rules: [{ required: true, message: '请选择故事类型' }] }]"
 
                 >
-                    <a-select-option value='0'>Adventure</a-select-option>
-                    <a-select-option value='1'>Romantic</a-select-option>
-                    <a-select-option value='2'>Suspense</a-select-option>
-                    <a-select-option value='3'>Other</a-select-option>
-                    <a-select-option value='4'>Horror</a-select-option>
-                    <a-select-option value='5'>Funny</a-select-option>
+                    <a-select-option value='Adventure'>Adventure</a-select-option>
+                    <a-select-option value='Romantic'>Romantic</a-select-option>
+                    <a-select-option value='Suspense'>Suspense</a-select-option>
+                    <a-select-option value='Other'>Other</a-select-option>
+                    <a-select-option value='Horror'>Horror</a-select-option>
+                    <a-select-option value='Funny'>Funny</a-select-option>
                 </a-select>
             </a-form-item>
             <a-divider>开始你的创作吧！</a-divider>
