@@ -1,51 +1,91 @@
-import {axios} from '../utils/request';
-
+import { axios } from '../utils/request'
 const api = {
     storyPre: '/api/story',
-};
-
+    interactPre:'/api/interact'
+}
 export function getAllStoryAPI() {
     return axios({
         url: `${api.storyPre}/all-story`,
         method: 'GET',
-    });
+    })
 }
-
-export function getByTagAPI(data) {
+export function getSuspenseAPI() {
     return axios({
-        url: `${api.storyPre}/by-tag?tag=${data.tag}`,
+        url: `${api.storyPre}/by-type?tag=Suspense`,
         method: 'GET',
-    });
+    })
 }
-
+export function getAdventureAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Adventure`,
+        method: 'GET',
+    })
+}
+export function getOtherAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Other`,
+        method: 'GET',
+    })
+}
+export function getHorrorAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Horror`,
+        method: 'GET',
+    })
+}
+export function getRomanticAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Romantic`,
+        method: 'GET',
+    })
+}
+export function getFunnyAPI() {
+    return axios({
+        url: `${api.storyPre}/by-type?tag=Funny`,
+        method: 'GET',
+    })
+}
 export function uploadNewStoryAPI(data) {
     return axios({
-        url: `${api.storyPre}/upload`,
-        method: 'POST',
-        data,
-    });
+        url:`${api.storyPre}/upload`,
+        method:'POST',
+        data
+    })
 
 }
-
 export function getStoryByIdAPI(id) {
     return axios({
         url: `${api.storyPre}/storyInfo/${id}`,
         method: 'GET',
-    });
+    })
 }
-
 export function getStoryContentAPI(id) {
     return axios({
         url: `${api.storyPre}/content/${id}`,
         method: 'GET',
-    });
+    })
 }
+export function getCommentAPI(id) {
+    return axios({
+        url: `${api.interactPre}/getComment`,
+        method: 'GET',
+        params: {storyId: id},
 
+
+    })
+}
+export function sendCommentAPI(data) {
+    return axios({
+        url: `${api.interactPre}/comment`,
+        method: 'POST',
+        data
+    })
+}
 export function recreateAPI(data) {
     return axios({
         url: `${api.storyPre}/recreate`,
         method: 'POST',
         data,
-    });
+    })
 }
 

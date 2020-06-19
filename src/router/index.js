@@ -27,15 +27,14 @@ const routes = [
     ]
   },
   {
-    path: '/home',
-    name: 'home',
-    redirect: '/storyContent',
+    path: '/storyContent/:id',
+    name: 'storyContent.vue',
     component: ()=> import('../views/layout'),
     children:[
       {
-        path:'/storyContent',
-        name:'content',
-        component:()=>import('../views/story/content')
+        path:'/storyContent/:id',
+        name:'storyContent.vue',
+        component:()=>import('../views/story/storyContent')
       },
 
     ]

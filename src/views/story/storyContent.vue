@@ -3,12 +3,13 @@
     <div class="content">
         <a-layout class="a_layout">
             <a-layout-content class="story_board">
-                <div class="items" style="font-size: 30px;text-align: center;padding-top: 20px">
+                <div  style="font-size: 30px;text-align: center;padding-top: 20px">
                     <span class="value">{{ storyParams.title }}</span>
                 </div>
+
                 <a-divider></a-divider>
-                <div class="items-text" style="font-size: 20px;text-align: center">
-                    <span class="value">{{ storyParams.storyContent }}</span>
+                <div style="font-size: 20px;text-align: left">
+                    <span class="value">{{ storyParams.story }}</span>
                 </div>
                 <!--
                 <div class="items-recreate">
@@ -21,34 +22,52 @@
             </a-layout-content>
        </a-layout>
    </div>
-        <a-divider></a-divider>
-        <div class="content">
-            <a-layout class="a_layout">
-                <a-layout-content class="story_board">
-                    <h3 style="padding: 20px 0 "><span style="color:#313c5b;font-weight:bold;">发表评论</span></h3>
-                    <p><a-textarea rows="10" cols="90"  placeholder="在此发表"></a-textarea></p>
-                    <p style="text-align:right;"><a-button class="button">发表</a-button></p>
-                </a-layout-content>
-            </a-layout>
+
+        <div style="padding: 40px 50px">
+            <a-divider style="padding-bottom: 20px">评论区</a-divider>
+            <div style="width:60%;float: left;height: 400px">
+                <a-list
+                    :data-source="storyComments"
+                    :pagination="pagination"
+                    bordered>
+
+                    <a-list-item slot="renderItem" slot-scope="item">
+                        <div >{{item.userName}}:{{item.content}}</div>
+                    </a-list-item>
+                </a-list>
+            </div>
+            <div style="width:30%;float: right;" >
+                <h3 style="padding: 20px 0 "><span style="color:#313c5b;font-weight:bold;">发表评论</span></h3>
+                <p><a-textarea rows="10"   placeholder="在此发表" id="comment_content"></a-textarea></p>
+                <p style="text-align:right;"><a-button class="button" @click="Comment">发表</a-button></p>
+            </div>
         </div>
+
+
 </div>
 </template>
 <script>
     import { mapGetters, mapActions, mapMutations } from 'vuex'
+    import AListItem from "ant-design-vue/es/list/Item";
     //import  from './components/'
     export default{
         name: "content",
+        components: {AListItem},
         component: {
 
         },
         data(){
             return{
-
+                pagination:{
+                    pageSize:6
+                }
             }
         },
         computed:{
             ...mapGetters([
-                'storyParams'
+                'storyParams',
+                'storyComments',
+                'userId'
             ])
         },
         mounted() {
@@ -56,7 +75,9 @@
             this.set_currentStoryId(Number(this.$route.params.id))
             this.getStoryById(this.storyParams.id)
             this.getContentById(this.storyParams.id)
+            this.getCommentById(this.storyParams.id)
             console.log(this.storyParams)
+            console.log(this.storyComments)
         },
         beforeRouteUpdate(to, from, next) {
 
@@ -67,8 +88,18 @@
             ]),
             ...mapActions([
                 'getStoryById',
-                'getContentById'
-            ])
+                'getContentById',
+                'getCommentById',
+                'sendComment'
+            ]),
+            Comment(){
+                const data={
+                    storyId:this.storyParams.id,
+                    commenterId:this.userId,
+                    content:document.getElementById('comment_content').value
+                }
+                this.sendComment(data);
+            }
         }
     }
 </script>
