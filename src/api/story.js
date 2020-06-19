@@ -4,43 +4,43 @@ const api = {
 }
 export function getAllStoryAPI() {
     return axios({
-        url: `${api.storyPre}/allStory`,
+        url: `${api.storyPre}/all-story`,
         method: 'GET',
     })
 }
 export function getSuspenseAPI() {
     return axios({
-        url: `${api.storyPre}/by-type?tag=Suspense`,
+        url: `${api.storyPre}/by-tag?tag=Suspense`,
         method: 'GET',
     })
 }
 export function getAdventureAPI() {
     return axios({
-        url: `${api.storyPre}/by-type?tag=Adventure`,
+        url: `${api.storyPre}/by-tag?tag=Adventure`,
         method: 'GET',
     })
 }
 export function getOtherAPI() {
     return axios({
-        url: `${api.storyPre}/by-type?tag=Other`,
+        url: `${api.storyPre}/by-tag?tag=Other`,
         method: 'GET',
     })
 }
 export function getHorrorAPI() {
     return axios({
-        url: `${api.storyPre}/by-type?tag=Horror`,
+        url: `${api.storyPre}/by-tag?tag=Horror`,
         method: 'GET',
     })
 }
 export function getRomanticAPI() {
     return axios({
-        url: `${api.storyPre}/by-type?tag=Romantic`,
+        url: `${api.storyPre}/by-tag?tag=Romantic`,
         method: 'GET',
     })
 }
 export function getFunnyAPI() {
     return axios({
-        url: `${api.storyPre}/by-type?tag=Funny`,
+        url: `${api.storyPre}/by-tag?tag=Funny`,
         method: 'GET',
     })
 }
