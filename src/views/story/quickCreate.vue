@@ -97,7 +97,8 @@
                             authorId:this.userId,
                             title:this.form.getFieldValue('title'),
                             content:document.getElementById('content').value,
-                            tag:this.form.getFieldValue('storyType')
+                            tag:'Other'
+                            //tag:this.form.getFieldValue('storyType')
                         }
                         console.log(data)
                         this.uploadStory(data)

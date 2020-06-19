@@ -31,10 +31,11 @@
         >
             <a-list-item slot="renderItem" slot-scope="item">
                 <div style="width: 10%;text-align: center">热度{{item.popularity}}</div>
-                <div style="width: 40%;text-align: center">《{{ item.title }}》</div>
-                <div style="width: 10%;text-align: center"  v-if="item.depth>0">第{{item.depth}}续</div>
-                <div style="width: 10%;text-align: center" v-else>首篇</div>
-                <div style="width: 20%;text-align: center">{{item.tag}}</div>
+                <div style="width: 30%;text-align: center">《{{ item.title }}》</div>
+                <div style="width: 10%;text-align: center">{{ item.userName }}</div>
+                <div style="width: 15%;text-align: center"  v-if="item.depth>0">第{{item.depth}}续篇</div>
+                <div style="width: 15%;text-align: center" v-else>首篇</div>
+                <div style="width: 15%;text-align: center">{{item.tag}}</div>
                 <div style="width: 5%"></div>
                 <a-button  shape="round" size="small"  @click="writogether(item)">WriTogether!</a-button>
             </a-list-item>

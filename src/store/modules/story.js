@@ -1,7 +1,6 @@
 import {
     getAdventureAPI,
     getAllStoryAPI,
-    getCommentAPI,
     getFunnyAPI,
     getHorrorAPI,
     getOtherAPI,
@@ -9,10 +8,9 @@ import {
     getStoryByIdAPI,
     getStoryContentAPI,
     getSuspenseAPI,
-    sendCommentAPI,
     uploadNewStoryAPI
 } from "../../api/story";
-import {getUserInfoAPI} from "../../api/user";
+import {sendCommentAPI,getCommentAPI} from"../../api/interact";
 
 const story = {
     state: {
@@ -53,7 +51,7 @@ const story = {
             state.storyParams.popularity=data.popularity;
             state.storyParams.depth=data.depth;
             state.storyParams.authorId=data.authorId;
-            state.storyParams.authorName=data.username;
+            state.storyParams.authorName=data.userName;
         },
         set_storyContent:function (state, data) {
             state.storyParams.story=data.content;

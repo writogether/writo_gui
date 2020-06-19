@@ -39,6 +39,19 @@ const routes = [
 
     ]
   },
+  {
+    path: '/myStory',
+    name: 'myStory',
+    component: ()=> import('../views/layout'),
+    children:[
+      {
+        path:'/myStory',
+        name:'myStory',
+        component:()=>import('../views/story/myStory')
+      },
+
+    ]
+  },
 
   {
     path: '/home',
