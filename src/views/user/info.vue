@@ -12,9 +12,11 @@
                         </a-descriptions>
                         <a-input
                                 placeholder="请填写用户名"
-                                v-decorator="['userName', { rules: [{ required: true, message: '请输入用户名' }] }]"
+                                v-decorator="['userName', { rules: [{ required: true, message: '请输入用户名' }, { validator: this.checkUserName }] ,  validateTrigger: 'blur'}]"
                                 v-if="modify"
-                        />
+                        >
+                            <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
+                        </a-input>
                     </a-form-item>
                     <a-form-item label="手机号" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }">
                         <a-descriptions v-if="!modify">
@@ -24,9 +26,11 @@
                         </a-descriptions>
                         <a-input
                                 placeholder="请填写手机号"
-                                v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' }] }]"
+                                v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' },{ validator: this.checkPhoneNumber }] ,  validateTrigger: 'blur'}]"
                                 v-if="modify"
-                        />
+                        >
+                            <a-icon slot="prefix" type="book" :style="{ color: 'rgba(0,0,0,.25)' }"/>
+                        </a-input>
                     </a-form-item>
                     <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
                         <a-descriptions v-if="!modify">
@@ -79,7 +83,6 @@
 <script>
 
     import {mapActions, mapGetters, mapMutations} from 'vuex';
-
 export default {
     name: 'info',
     data(){
@@ -114,20 +117,48 @@ export default {
             'search',
             'update'
         ]),
-        saveModify() {
+        checkUserName(rule, value, callback) {
+            if (value) {
+                callback();
+            } else {
+                callback(new Error('请输入用户名'));
+            }
+            callback()
+        },
+        checkPhoneNumber(rule, value, callback) {
+            const re = /^1[0-9]{10}$/
+            if (re.test(value)) {
+                callback();
+            } else {
+                callback(new Error('请输入有效手机号'));
+            }
+            callback()
+        },
+        saveModify(){
             this.form.validateFields((err, values) => {
+                /*
+                if(!this.userInfo.username){
+                    this.$message.error('请填写用户名');
+                    return;
+                }
+                if(!this.userInfo.phoneNumber){
+                    this.$message.error('请填写手机号');
+                    return;
+                }
+                 */
                 if (!err) {
                     const data = {
                         username: this.form.getFieldValue('userName'),
                         phoneNumber: this.form.getFieldValue('phoneNumber'),
                         description:this.form.getFieldValue('userDescription')
                     };
+                    this.$message.success( '保存成功！');
+                    this.modify = false
                     this.updateUserInfo(data).then(()=>{
                         this.modify = false
                     })
                 }
             });
-            this.modify = false
         },
         modifyInfo() {
             setTimeout(() => {
