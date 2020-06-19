@@ -58,6 +58,12 @@ export function getStoryByIdAPI(id) {
         method: 'GET',
     })
 }
+export function getStoryByFatherAPI(id) {
+    return axios({
+        url: `${api.storyPre}/by-father?fatherId=${id}`,
+        method: 'GET',
+    })
+}
 export function getStoryContentAPI(id) {
     return axios({
         url: `${api.storyPre}/content/${id}`,
