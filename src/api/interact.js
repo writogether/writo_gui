@@ -4,11 +4,21 @@ const api = {
     interactPre: '/api/interact',
 };
 
-export function commentAPI(data) {
-    return axios.post(
-        `${api.interactPre}/comment`,
-        data,
-    );
+export function getCommentAPI(id) {
+    return axios({
+        url: `${api.interactPre}/getComment`,
+        method: 'GET',
+        params: {storyId: id},
+
+
+    })
+}
+export function sendCommentAPI(data) {
+    return axios({
+        url: `${api.interactPre}/comment`,
+        method: 'POST',
+        data
+    })
 }
 
 export function evaluateAPI(data) {
@@ -25,12 +35,7 @@ export function toggleCollectAPI(data) {
     );
 }
 
-export function getCommentAPI(data) {
-    return axios.get(
-        `${api.interactPre}/comment?storyId=${data.storyId}`,
-        data,
-    );
-}
+
 
 export function getCollection(data) {
     return axios.get(

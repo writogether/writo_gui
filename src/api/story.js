@@ -1,11 +1,10 @@
 import { axios } from '../utils/request'
 const api = {
-    storyPre: '/api/story',
-    interactPre:'/api/interact'
+    storyPre: '/api/story'
 }
 export function getAllStoryAPI() {
     return axios({
-        url: `${api.storyPre}/all-story`,
+        url: `${api.storyPre}/allStory`,
         method: 'GET',
     })
 }
@@ -65,22 +64,7 @@ export function getStoryContentAPI(id) {
         method: 'GET',
     })
 }
-export function getCommentAPI(id) {
-    return axios({
-        url: `${api.interactPre}/getComment`,
-        method: 'GET',
-        params: {storyId: id},
 
-
-    })
-}
-export function sendCommentAPI(data) {
-    return axios({
-        url: `${api.interactPre}/comment`,
-        method: 'POST',
-        data
-    })
-}
 export function recreateAPI(data) {
     return axios({
         url: `${api.storyPre}/recreate`,
