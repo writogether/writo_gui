@@ -19,12 +19,6 @@ const user = {
                 state.userId = '',
                 state.userInfo = {};
         },
-        set_token: function (state, token) {
-            state.token = token;
-        },
-        set_email: (state, data) => {
-            state.email = data;
-        },
         set_userId: (state, data) => {
             state.userId = data;
         },
@@ -68,21 +62,13 @@ const user = {
             };
             const res = await updateUserInfoAPI(params);
                 message.success('修改成功');
-                dispatch('search');
+                dispatch('update');
 
         },
         logout: async ({commit}) => {
             removeToken();
             resetRouter();
             commit('reset_state');
-        },
-        // remove token
-        resetToken({commit}) {
-            return new Promise(resolve => {
-                removeToken(); // must remove  token  first
-                commit('reset_state');
-                resolve();
-            });
         },
     },
 };
