@@ -7,6 +7,7 @@ const getters = {
     storyList:state=>state.story.storyList,
     storyParams: state => state.story.storyParams,
     quickCreateModalVisible:state=>state.story.quickCreateModalVisible,
+    storyComments: state=>state.story.storyComments,
 }
 
 export default getters
