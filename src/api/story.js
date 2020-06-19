@@ -6,7 +6,7 @@ const api = {
 
 export function getAllStoryAPI() {
     return axios({
-        url: `${api.storyPre}/allStory`,
+        url: `${api.storyPre}/all-story`,
         method: 'GET',
     });
 }
