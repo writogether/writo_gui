@@ -8,6 +8,10 @@
                 'storyType',
                 { rules: [{ required: true, message: '请选择故事类型' }] }]"
                 @change="changeStoryType"
+<<<<<<< HEAD
+=======
+
+>>>>>>> ba4bb730a3187947d0e4cf1552b52e0e7d1a54ff
             >
                 <a-select-option value='0'>All Stories</a-select-option>
                 <a-select-option value='1'>Adventure</a-select-option>
