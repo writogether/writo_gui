@@ -28,7 +28,10 @@
                         <span v-if="evaluation==='Like'"><a-icon type="smile"/> Like it!</span>
                         <span v-if="evaluation==='Dislike'"><a-icon type="meh"/> Emm..</span>
                     </span>
-                    <span style="padding: 0 20px"><a-button><a-icon type="star"/>收藏</a-button></span>
+                    <span style="padding: 0 20px">
+                        <a-button v-if="collected"  @click="collectStory"><a-icon type="star" theme="filled"/>已收藏</a-button>
+                        <a-button v-else  @click="collectStory"><a-icon type="star"/>收藏</a-button>
+                    </span>
                 </div>
                 <div style="padding-bottom: 30px"></div>
             </a-layout-content>
@@ -139,10 +142,11 @@
                 'getStoryByFather',
                 'getEval',
                 'checkIfCollected',
-                'evalStory'
+                'evalStory',
+                'toggleCollect'
 
             ]),
-            likeEval(){
+             likeEval(){
                 const evalData={
                     likerId:this.userId,
                     storyId:this.storyParams.id,
@@ -157,6 +161,11 @@
                     type:'Dislike'
                 };
                 this.evalStory(evalData);
+            }
+            ,
+            collectStory(){
+                this.toggleCollect(this.storyParams.id);
+                this.checkIfCollected(this.storyParams.id);
             }
             ,
             set_find_recreate(){
