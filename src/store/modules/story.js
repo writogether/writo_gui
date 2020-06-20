@@ -29,8 +29,6 @@ const story = {
             popularity:'',
             story:'',
         },
-        storyComments:[],
-
         quickCreateModalVisible:false,
     },
     mutations: {
@@ -59,9 +57,6 @@ const story = {
         set_storyContent:function (state, data) {
             state.storyParams.story=data.content;
         },
-        set_storyComment:function (state, data) {
-            state.storyComments=data;
-        }
 
     },
     actions: {
@@ -110,16 +105,6 @@ const story = {
             const res=await getStoryContentAPI(data);
             commit('set_storyContent',res);
         },
-        getCommentById:async ({state,commit},data)=>{
-            const res=await getCommentAPI(data);
-            commit('set_storyComment',res);
-        },
-        sendComment:async ({state,commit},data)=>{
-            const res=await sendCommentAPI(data);
-            const res2=await getCommentAPI(data.storyId);
-            commit('set_storyComment',res2);
-
-        }
     }
 }
 export default story

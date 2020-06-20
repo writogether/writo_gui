@@ -9,8 +9,6 @@ export function getCommentAPI(id) {
         url: `${api.interactPre}/getComment`,
         method: 'GET',
         params: {storyId: id},
-
-
     })
 }
 export function sendCommentAPI(data) {
@@ -27,19 +25,28 @@ export function evaluateAPI(data) {
         data,
     );
 }
+export function getEvalAPI(storyId) {
+    return axios({
+        url: `${api.interactPre}/getEvaluation`,
+        method: 'GET',
+        params: {storyId: storyId},
+    })
+}
 
-export function toggleCollectAPI(data) {
+export function toggleCollectAPI(storyId) {
     return axios.post(
-        `${api.interactPre}/collect?storyId=${data.storyId}`,
-        data,
+        `${api.interactPre}/collect?storyId=${storyId}`
     );
 }
 
-
-
-export function getCollection(data) {
+export function checkIfCollectedAPI(storyId) {
     return axios.get(
-        `${api.interactPre}/collect`,
-        data,
+        `${api.interactPre}/checkIfCollected?storyId=${storyId}`,
+    );
+}
+
+export function getCollection() {
+    return axios.get(
+        `${api.interactPre}/collect`
     );
 }
