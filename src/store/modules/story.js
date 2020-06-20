@@ -11,7 +11,6 @@ import {
     getSuspenseAPI,
     uploadNewStoryAPI
 } from "../../api/story";
-import {sendCommentAPI,getCommentAPI} from"../../api/interact";
 
 const story = {
     state: {

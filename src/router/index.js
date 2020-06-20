@@ -28,7 +28,7 @@ const routes = [
   },
   {
     path: '/storyContent/:id',
-    name: 'storyContent.vue',
+    name: 'storyContent',
     component: ()=> import('../views/layout'),
     children:[
       {
@@ -65,19 +65,6 @@ const routes = [
         component: () => import('../views/user/info')
       },
 
-    ]
-  },
-  {
-    path: '/recreate',
-    name: 'write',
-    redirect: '/story/recreate',
-    component: () => import('../views/layout'),
-    children: [
-      {
-        path:'/story/recreate',
-        name:'write',
-        component:()=>import('../views/story/recreate')
-      }
     ]
   }
 ]

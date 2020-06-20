@@ -21,19 +21,34 @@
                 <a-divider></a-divider>
                 <div style="font-size: 20px;text-align: center">
                     <span style="padding: 0 20px">
-                        <a-button-group  v-if="evaluation==='none'">
+                        <span v-if="evaluation==='Like'"><a-icon type="smile"/> Like it!</span>
+                        <span v-else-if="evaluation==='Dislike'"><a-icon type="meh"/> Emm..</span>
+                        <a-button-group  v-else>
                             <a-button @click="likeEval"><a-icon type="like"/>like</a-button>
                             <a-button @click="dislikeEval"><a-icon type="dislike"/>dislike</a-button>
                         </a-button-group>
-                        <span v-if="evaluation==='Like'"><a-icon type="smile"/> Like it!</span>
-                        <span v-if="evaluation==='Dislike'"><a-icon type="meh"/> Emm..</span>
                     </span>
                     <span style="padding: 0 20px">
                         <a-button v-if="collected"  @click="collectStory"><a-icon type="star" theme="filled"/>已收藏</a-button>
                         <a-button v-else  @click="collectStory"><a-icon type="star"/>收藏</a-button>
                     </span>
                 </div>
-                <div style="padding-bottom: 30px"></div>
+                <a-divider>
+                <div style="padding: 10px 0"><a-button  shape="round" size="large"  @click="set_recreate_visible"><a-icon type="edit"/> WriTogether!</a-button></div>
+                </a-divider>
+                    <div v-if="recreateVisible" style="padding-bottom: 40px">
+                        <a-textarea rows="10" id="recreation"></a-textarea>
+                        <a-popconfirm
+                            placement="topLeft"
+                            ok-text="Yes"
+                            cancel-text="No"
+                            title="是否确认提交？"
+                            @confirm="submit"
+                        >
+                            <a-button>提交续写</a-button>
+                        </a-popconfirm>
+
+                    </div>
             </a-layout-content>
        </a-layout>
     </div>
@@ -90,15 +105,19 @@
 <script>
     import { mapGetters, mapActions, mapMutations } from 'vuex'
     import AListItem from "ant-design-vue/es/list/Item";
+    import ATextarea from "ant-design-vue/es/input/TextArea";
     //import  from './components/'
     export default{
 
-        name: "content",
-        components: {AListItem},
+        name: "storyContent",
+        components: {ATextarea, AListItem},
         component: {
         },
         data(){
             return{
+                recreateVisible:false,
+                evaluation:'',
+                collected:false,
                 pagination:{
                     pageSize:6
                 },
@@ -112,23 +131,18 @@
                 'storyComments',
                 'userId',
                 'recreateList',
-                'evaluation',
-                'collected'
             ])
         },
-        mounted() {
+        async mounted() {
             console.log(this.$route.params.id),
-            this.set_currentStoryId(Number(this.$route.params.id))
-            this.getStoryById(this.storyParams.id)
-            this.getContentById(this.storyParams.id)
-            this.getCommentById(this.storyParams.id)
-            this.inputValue1=Number(this.storyParams.depth)
-            this.getEval(this.storyParams.id)
-            console.log(this.evaluation)
-            this.checkIfCollected(this.storyParams.id)
-        },
-        beforeRouteUpdate(to, from, next) {
-
+            await this.set_currentStoryId(Number(this.$route.params.id))
+            await this.getStoryById(this.storyParams.id)
+            await this.getContentById(this.storyParams.id)
+            await this.getCommentById(this.storyParams.id)
+             this.inputValue1=Number(this.storyParams.depth)
+            this.evaluation=await this.getEval(this.storyParams.id)
+            console.log('eval:',this.evaluation)
+            this.collected=await this.checkIfCollected(this.storyParams.id)
         },
         methods: {
             ...mapMutations([
@@ -143,7 +157,8 @@
                 'getEval',
                 'checkIfCollected',
                 'evalStory',
-                'toggleCollect'
+                'toggleCollect',
+                'uploadStory'
 
             ]),
              likeEval(){
@@ -153,6 +168,7 @@
                     type:'Like'
                 };
                 this.evalStory(evalData);
+                this.evaluation='Like';
             },
             dislikeEval(){
                 const evalData={
@@ -161,11 +177,12 @@
                     type:'Dislike'
                 };
                 this.evalStory(evalData);
+                this.evaluation='Dislike';
             }
             ,
             collectStory(){
                 this.toggleCollect(this.storyParams.id);
-                this.checkIfCollected(this.storyParams.id);
+                this.collected=!this.collected;
             }
             ,
             set_find_recreate(){
@@ -185,6 +202,28 @@
                 document.getElementById("comment_content").value='';
                 this.sendComment(data);
 
+            },
+            writogether(record){
+                console.log(record)
+                this.$router.push({
+                    name:'storyContent',
+                    params:{
+                        id:record.id
+                    }
+                })
+            },
+            set_recreate_visible(){
+                this.recreateVisible=!this.recreateVisible;
+            },
+            submit(){
+                const data={
+                    fatherId:this.storyParams.id,
+                    authorId:this.userId,
+                    title:this.storyParams.title,
+                    content:document.getElementById("recreation").value,
+                    tag:this.storyParams.tag
+                }
+                this.uploadStory(data);
             }
         }
     }

@@ -71,11 +71,4 @@ export function getStoryContentAPI(id) {
     })
 }
 
-export function recreateAPI(data) {
-    return axios({
-        url: `${api.storyPre}/recreate`,
-        method: 'POST',
-        data,
-    })
-}
 
