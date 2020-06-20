@@ -1,5 +1,5 @@
 <template>
-    <div style="padding-top: 195px ;width:75%;margin: 0 auto">
+    <div style="width:85%;margin: 0 auto">
         <div class="content">
         <a-layout class="a_layout">
             <a-layout-content class="story_board">

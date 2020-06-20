@@ -19,7 +19,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   width: 100%;
-  padding: 200px 150px 150px;
 
   background: white url('assets/backGround.jpg') no-repeat ;
   background-position-x: center;

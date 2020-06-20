@@ -17,7 +17,7 @@
         <div class="logout">
             <a-dropdown placement="bottomCenter">
                 <div class="user">
-                    <a-avatar src="./defaultAvatar.png"></a-avatar>
+                    <a-avatar style="background-color:#87d068" icon="user" />
                     <span style="font-size: 14px">{{ userInfo.userName }}</span>
                     <a-icon style="margin-left: 3px; font-size: 16px" type="down"></a-icon>
                 </div>
@@ -35,6 +35,7 @@
         </div>
         
     </div>
+    
     
 </template>
 <script>
@@ -113,7 +114,7 @@ export default {
           }
 
           .search {
-              width: 300px; 
+              width: 300px;
               margin-left: 30px
           }
         }

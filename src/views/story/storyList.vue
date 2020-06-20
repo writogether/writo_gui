@@ -1,5 +1,5 @@
 <template>
-    <div style="padding-top: 150px ;width:75%;margin: 0 auto">
+    <div style="width:85%; margin: 0 auto">
     <div class="storyList">
         <div style="background: #ffffff;padding: 20px 40px;border-top-left-radius: 10px;border-top-right-radius: 10px">
             <span style="font-size: large ">选择故事类型：</span>

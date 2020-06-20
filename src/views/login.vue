@@ -65,7 +65,7 @@
               size="large"
               placeholder="用户名"
               v-decorator="[
-              'registerUsername', 
+              'registerUsername',
               {rules: [{ required: true, message: '请输入用户名' }], validateTrigger: 'blur'}]">
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
@@ -75,7 +75,7 @@
               size="large"
               placeholder="手机号"
               v-decorator="[
-              'registerPhoneNumber', 
+              'registerPhoneNumber',
               {rules: [{ required: true, message: '请输入手机号' }, { validator: this.checkPhoneNumber }], validateTrigger: 'blur'}]">
               <a-icon slot="prefix" type="book" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
@@ -86,7 +86,7 @@
               type="password"
               placeholder="密码"
               v-decorator="[
-                'registerPassword', 
+                'registerPassword',
                 {rules: [{ required: true, message: '请输入密码' }, { validator: this.handlePassword }], validateTrigger: 'blur'}]">
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
@@ -97,7 +97,7 @@
               type="password"
               placeholder="确认密码"
               v-decorator="[
-                'registerPasswordconfirm', 
+                'registerPasswordconfirm',
                 {rules: [{ required: true, message: '请输入密码' }, { validator: this.handlePasswordCheck }], validateTrigger: 'blur'}]">
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
@@ -280,7 +280,7 @@ export default {
       }
 }
 .user-layout-login {
-  padding: 80px 0px;
+  padding: 80px 0;
   label {
     font-size: 14px;
   }
