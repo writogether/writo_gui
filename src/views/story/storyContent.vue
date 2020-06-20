@@ -7,18 +7,28 @@
                     <span class="value">{{ storyParams.title }}</span>
                 </div>
                 <div  style="font-size: 15px;text-align: center;padding-top: 30px">
-                    <span class="value" >热度：{{storyParams.popularity}}</span>
-                    <span style="padding: 0 40px"></span>
-                    <span class="value" >作者：{{ storyParams.authorName }}</span>
-                    <span style="padding: 0 40px"></span>
-                    <span class="value"  v-if="storyParams.depth>0">第{{ storyParams.depth }}续篇</span>
-                    <span class="value"  v-else>首篇</span>
+                    <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{storyParams.popularity}}</span>
+                    <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{ storyParams.authorName }}</span>
+                    <span class="value" style="padding: 0 20px" v-if="storyParams.depth>0"><a-icon type="edit"/> 第{{ storyParams.depth }}续篇</span>
+                    <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/> 首篇</span>
 
                 </div>
 
                 <a-divider></a-divider>
                 <div style="font-size: 20px;text-align: left">
                     <span class="value">{{ storyParams.story }}</span>
+                </div>
+                <a-divider></a-divider>
+                <div style="font-size: 20px;text-align: center">
+                    <span style="padding: 0 20px">
+                        <a-button-group  v-if="evaluation==='none'">
+                            <a-button @click="likeEval"><a-icon type="like"/>like</a-button>
+                            <a-button @click="dislikeEval"><a-icon type="dislike"/>dislike</a-button>
+                        </a-button-group>
+                        <span v-if="evaluation==='Like'"><a-icon type="smile"/> Like it!</span>
+                        <span v-if="evaluation==='Dislike'"><a-icon type="meh"/> Emm..</span>
+                    </span>
+                    <span style="padding: 0 20px"><a-button><a-icon type="star"/>收藏</a-button></span>
                 </div>
                 <div style="padding-bottom: 30px"></div>
             </a-layout-content>
@@ -79,10 +89,10 @@
     import AListItem from "ant-design-vue/es/list/Item";
     //import  from './components/'
     export default{
+
         name: "content",
         components: {AListItem},
         component: {
-
         },
         data(){
             return{
@@ -98,7 +108,9 @@
                 'storyParams',
                 'storyComments',
                 'userId',
-                'recreateList'
+                'recreateList',
+                'evaluation',
+                'collected'
             ])
         },
         mounted() {
@@ -108,8 +120,9 @@
             this.getContentById(this.storyParams.id)
             this.getCommentById(this.storyParams.id)
             this.inputValue1=Number(this.storyParams.depth)
-            console.log(this.storyParams)
-            console.log(this.storyComments)
+            this.getEval(this.storyParams.id)
+            console.log(this.evaluation)
+            this.checkIfCollected(this.storyParams.id)
         },
         beforeRouteUpdate(to, from, next) {
 
@@ -123,8 +136,29 @@
                 'getContentById',
                 'getCommentById',
                 'sendComment',
-                'getStoryByFather'
+                'getStoryByFather',
+                'getEval',
+                'checkIfCollected',
+                'evalStory'
+
             ]),
+            likeEval(){
+                const evalData={
+                    likerId:this.userId,
+                    storyId:this.storyParams.id,
+                    type:'Like'
+                };
+                this.evalStory(evalData);
+            },
+            dislikeEval(){
+                const evalData={
+                    likerId:this.userId,
+                    storyId:this.storyParams.id,
+                    type:'Dislike'
+                };
+                this.evalStory(evalData);
+            }
+            ,
             set_find_recreate(){
                 this.find_recreate=!this.find_recreate;
 

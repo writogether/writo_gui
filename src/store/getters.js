@@ -8,7 +8,12 @@ const getters = {
     recreateList:state=>state.story.recreateList,
     storyParams: state => state.story.storyParams,
     quickCreateModalVisible:state=>state.story.quickCreateModalVisible,
-    storyComments: state=>state.story.storyComments,
+
+    //interact
+    storyComments: state=>state.interact.storyComments,
+    evaluation:state=>state.interact.evaluation,
+    collected:state=>state.interact.collected,
+    collectionList:state=>state.interact.collectionList
 }
 
 export default getters
