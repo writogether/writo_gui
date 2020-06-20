@@ -11,8 +11,6 @@ const getters = {
 
     //interact
     storyComments: state=>state.interact.storyComments,
-    evaluation:state=>state.interact.evaluation,
-    collected:state=>state.interact.collected,
     collectionList:state=>state.interact.collectionList
 }
 
