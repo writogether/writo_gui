@@ -88,7 +88,6 @@
                     :pagination="pagination"
                     style="height: 360px"
                     bordered>
-
                     <a-list-item slot="renderItem" slot-scope="item">
                         <div style="font-size: 16px">{{item.userName}} : {{item.content}}</div>
                     </a-list-item>
