@@ -30,8 +30,8 @@
                     <a-icon type="inbox" />
                     <span>收藏</span>
                 </a-menu-item>
-                <a-menu-item key="layout" @click="quit()">
-                    <a-icon type="poweroff" />
+                <a-menu-item key="logout" @click="quit()">
+                    <a-icon type="logout" />
                     <span>登出</span>
                 </a-menu-item>
             </a-sub-menu>

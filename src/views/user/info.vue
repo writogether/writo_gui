@@ -1,7 +1,7 @@
 <template>
     <div class="info-wrapper">
         <a-form :form="form" style="margin-top: 30px">
-            <a-form-item label="用户名" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
+            <a-form-item label="用户名" :label-col="{ span: 2 }" :wrapper-col="{ span: 8, offset: 1  }">
                 <span v-if="!modify">{{userInfo.username}}</span>
                 <a-input
                     placeholder="请填写用户名"
@@ -11,7 +11,7 @@
                     <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
                 </a-input>
             </a-form-item>
-            <a-form-item label="手机号" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }">
+            <a-form-item label="手机号" :label-col="{ span: 2 }" :wrapper-col="{ span: 8, offset: 1 }">
                 <span v-if="!modify">{{userInfo.phoneNumber}}</span>
                 <a-input
                     placeholder="请填写手机号"
@@ -21,7 +21,7 @@
                     <a-icon slot="prefix" type="book" :style="{ color: 'rgba(0,0,0,.25)' }" />
                 </a-input>
             </a-form-item>
-            <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
+            <a-form-item label="个人介绍" :label-col="{ span: 2 }" :wrapper-col="{ span: 8, offset: 1  }">
                 <span v-if="!modify">{{userInfo.description}}</span>
                 <a-textarea
                         v-if="modify"
@@ -38,9 +38,10 @@
                     取消
                 </a-button>
             </a-form-item>
-            <a-form-item :wrapper-col="{ span: 8, offset: 0 }" v-else>
+            <a-form-item :wrapper-col="{ span: 8, offset: 0 }" v-if="!modify">
                 <div class="button">
-                    <a-button type="primary" @click="modifyInfo">
+                    <a-button type="default" @click="modifyInfo">
+                        <a-icon type="edit" />
                         修改信息
                     </a-button>
                 </div>
@@ -149,17 +150,17 @@
 </script>
 <style scoped lang="less">
     .info-wrapper {
-        padding: 150px 200px;
+        padding: 120px 200px;
         
         .button {
-            padding-top: 20px;
+            padding-top: 5px;
         }
         
         .chart {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 20px
+            margin-top: 10px
         }
     }
 </style>

@@ -26,7 +26,7 @@
               placeholder="用户名"
               v-decorator="[
                 'username',
-                {rules: [{ required: true, message: '用户名' }], validateTrigger: 'blur'}
+                {rules: [{ required: true, message: '请输入用户名' }], validateTrigger: 'blur'}
               ]"
             >
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
