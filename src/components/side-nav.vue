@@ -1,8 +1,8 @@
 <template>
     <div class="side-nav">
+        <div style="padding-top: 40px;background-color: white"></div>
         <a-menu class="menu"
                 mode="inline"
-                theme="dark"
                 :defaultOpenKeys="['compass','user']"
         >
             <a-sub-menu key="compass">
@@ -113,7 +113,7 @@
     
     .title {
         font-size: 33px;
-        color: rgba(0, 0, 0, .85);
+        color:white;
         font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
         font-weight: 600;
         position: relative;

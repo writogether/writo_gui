@@ -20,8 +20,6 @@ export default {
   color: #2c3e50;
   width: 100%;
 
-  background: white url('assets/backGround.jpg') no-repeat ;
-  background-position-x: center;
 
 }
 
