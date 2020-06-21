@@ -110,8 +110,8 @@
                 ],
             ),
             ...mapActions([
-                'search',
-                'update',
+                'getUserInfo',
+                'updateUserInfo',
             ]),
             checkUserName(rule, value, callback) {
                 if (value) {
