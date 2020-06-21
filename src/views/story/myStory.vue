@@ -62,20 +62,21 @@
                 pagination:{
                     pageSize:12
                 },
-                myList:[]
+                myList:[],
             }
         },
         async mounted() {
             await this.getCollection()
             await this.getStoryList()
-            await this.add()
+            await  this.add()
         },
         computed:{
             ...mapGetters(
                 [
                     'collectionList',
                     'storyList',
-                    'userId'
+                    'userId',
+                    'userInfo'
                 ]
             )
         },
@@ -93,10 +94,9 @@
                 ]
             ),
             add(){
-                console.log(this.storyList)
+                console.log(this.storyList.length)
                 for(let i=0;i<this.storyList.length;i++){
-                    if(this.storyList.title==='jj'){
-
+                    if(this.storyList[i].authorId==this.userId){
                         let obj={}
                         obj.popularity = this.storyList[i].popularity
                         obj.title = this.storyList[i].title

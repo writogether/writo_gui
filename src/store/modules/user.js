@@ -5,11 +5,7 @@ import {getUserInfoAPI, loginAPI, registerAPI, updateUserInfoAPI} from '../../ap
 
 const getDefaultState = () => {
     return {
-<<<<<<< HEAD
-        userId: '3',
-=======
         userId: '',
->>>>>>> ba4bb730a3187947d0e4cf1552b52e0e7d1a54ff
         userInfo: {}
     };
 };

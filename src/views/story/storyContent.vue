@@ -88,10 +88,6 @@
                     :pagination="pagination"
                     style="height: 360px"
                     bordered>
-<<<<<<< HEAD
-=======
-
->>>>>>> ba4bb730a3187947d0e4cf1552b52e0e7d1a54ff
                     <a-list-item slot="renderItem" slot-scope="item">
                         <div style="font-size: 16px">{{item.userName}} : {{item.content}}</div>
                     </a-list-item>
