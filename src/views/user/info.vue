@@ -71,10 +71,12 @@
         },
         components: {},
         computed: {
-            ...mapGetters([
+            ...mapGetters(
+				[
                 'userId',
                 'userInfo',
-            ]),
+				]
+			),
         },
         async mounted() {
             await this.getUserInfo();
@@ -86,10 +88,12 @@
                     'set_userId',
                 ],
             ),
-            ...mapActions([
+            ...mapActions(
+				[
                 'getUserInfo',
                 'updateUserInfo',
-            ]),
+				]
+			),
             checkUserName(rule, value, callback) {
                 if (value) {
                     callback();
