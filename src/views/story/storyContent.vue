@@ -198,7 +198,6 @@
                     commenterId:this.userId,
                     content:document.getElementById('comment_content').value
                 }
-                document.getElementById("comment_content").value='';
                 this.sendComment(data);
 
             },

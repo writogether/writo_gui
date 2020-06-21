@@ -123,7 +123,7 @@
             writogether(record){
                 console.log(record)
                 this.$router.push({
-                    name:'storyContent',
+                    name:'storyContent.vue',
                     params:{
                         id:record.id
                     }
