@@ -1,5 +1,5 @@
 <template>
-    <div style="width:85%;margin: 0 auto">
+    <div style="padding-top: 195px ;width:75%;margin: 0 auto">
         <div class="content">
         <a-layout class="a_layout">
             <a-layout-content class="story_board">
@@ -107,7 +107,7 @@
     import ATextarea from "ant-design-vue/es/input/TextArea";
     //import  from './components/'
     export default{
-
+        inject:["reload"],
         name: "storyContent",
         components: {ATextarea, AListItem},
         component: {
@@ -208,7 +208,7 @@
                     params:{
                         id:record.id
                     }
-                })
+                }).then(this.reload());
             },
             set_recreate_visible(){
                 this.recreateVisible=!this.recreateVisible;

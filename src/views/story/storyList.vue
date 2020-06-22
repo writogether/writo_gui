@@ -1,5 +1,5 @@
 <template>
-    <div style="width:85%; margin: 0 auto">
+    <div style="padding-top: 150px ;width:75%;margin: 0 auto">
     <div class="storyList">
         <div style="background: #ffffff;padding: 20px 40px;border-top-left-radius: 10px;border-top-right-radius: 10px">
             <span style="font-size: large ">选择故事类型：</span>
@@ -29,12 +29,12 @@
             bordered
         >
             <a-list-item slot="renderItem" slot-scope="item">
-                <div style="width: 10%;text-align: center">热度{{item.popularity}}</div>
+                <div style="width: 10%;text-align: center"><a-icon type="fire"/>{{item.popularity}}</div>
                 <div style="width: 30%;text-align: center">《{{ item.title }}》</div>
-                <div style="width: 10%;text-align: center">{{ item.userName }}</div>
-                <div style="width: 15%;text-align: center"  v-if="item.depth>0">第{{item.depth}}续篇</div>
-                <div style="width: 15%;text-align: center" v-else>首篇</div>
-                <div style="width: 15%;text-align: center">{{item.tag}}</div>
+                <div style="width: 10%;text-align: center"><a-icon type="user"/>{{ item.userName }}</div>
+                <div style="width: 20%;text-align: center"  v-if="item.depth>0"><a-icon type="edit"/>第{{item.depth}}续篇</div>
+                <div style="width: 20%;text-align: center" v-else><a-icon type="edit"/>首篇</div>
+                <div style="width: 10%;text-align: center"><a-icon type="tag"/>{{item.tag}}</div>
                 <div style="width: 5%"></div>
                 <a-button  shape="round" size="small"  @click="writogether(item)">WriTogether!</a-button>
             </a-list-item>
@@ -146,7 +146,7 @@
         background-color:#313c5b;
 
         .table{
-            background: #f0f2f5;
+            background: #ffffff;
             padding: 40px 20px;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;

@@ -1,27 +1,27 @@
 <template>
     <div class="info-wrapper">
         <a-form :form="form" style="margin-top: 30px">
-            <a-form-item label="用户名" :label-col="{ span: 2 }" :wrapper-col="{ span: 8, offset: 1  }">
+            <a-form-item label="用户名" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
                 <span v-if="!modify">{{userInfo.username}}</span>
                 <a-input
-                    placeholder="请填写用户名"
-                    v-decorator="['userName', { rules: [{ required: true, message: '请输入用户名' }, { validator: this.checkUserName }] ,  validateTrigger: 'blur'}]"
-                    v-if="modify"
+                        placeholder="请填写用户名"
+                        v-decorator="['userName', { rules: [{ required: true, message: '请输入用户名' }, { validator: this.checkUserName }] ,  validateTrigger: 'blur'}]"
+                        v-if="modify"
                 >
                     <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }" />
                 </a-input>
             </a-form-item>
-            <a-form-item label="手机号" :label-col="{ span: 2 }" :wrapper-col="{ span: 8, offset: 1 }">
+            <a-form-item label="手机号" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1 }">
                 <span v-if="!modify">{{userInfo.phoneNumber}}</span>
                 <a-input
-                    placeholder="请填写手机号"
-                    v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' },{ validator: this.checkPhoneNumber }] ,  validateTrigger: 'blur'}]"
-                    v-if="modify"
+                        placeholder="请填写手机号"
+                        v-decorator="['phoneNumber', { rules: [{ required: true, message: '请输入手机号' },{ validator: this.checkPhoneNumber }] ,  validateTrigger: 'blur'}]"
+                        v-if="modify"
                 >
                     <a-icon slot="prefix" type="book" :style="{ color: 'rgba(0,0,0,.25)' }" />
                 </a-input>
             </a-form-item>
-            <a-form-item label="个人介绍" :label-col="{ span: 2 }" :wrapper-col="{ span: 8, offset: 1  }">
+            <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
                 <span v-if="!modify">{{userInfo.description}}</span>
                 <a-textarea
                         v-if="modify"
@@ -38,10 +38,9 @@
                     取消
                 </a-button>
             </a-form-item>
-            <a-form-item :wrapper-col="{ span: 8, offset: 0 }" v-if="!modify">
+            <a-form-item :wrapper-col="{ span: 12, offset: 5 }" v-else>
                 <div class="button">
-                    <a-button type="default" @click="modifyInfo">
-                        <a-icon type="edit" />
+                    <a-button type="primary" @click="modifyInfo">
                         修改信息
                     </a-button>
                 </div>
@@ -73,11 +72,11 @@
         components: {},
         computed: {
             ...mapGetters(
-				[
-                'userId',
-                'userInfo',
-				]
-			),
+                [
+                    'userId',
+                    'userInfo',
+                ]
+            ),
         },
         async mounted() {
             await this.getUserInfo();
@@ -90,11 +89,11 @@
                 ],
             ),
             ...mapActions(
-				[
-                'getUserInfo',
-                'updateUserInfo',
-				]
-			),
+                [
+                    'getUserInfo',
+                    'updateUserInfo',
+                ]
+            ),
             checkUserName(rule, value, callback) {
                 if (value) {
                     callback();
@@ -150,17 +149,17 @@
 </script>
 <style scoped lang="less">
     .info-wrapper {
-        padding: 120px 200px;
-        
+        padding: 150px 200px;
+
         .button {
-            padding-top: 5px;
+            padding-top: 20px;
         }
-        
+
         .chart {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px
+            margin-top: 20px
         }
     }
 </style>
