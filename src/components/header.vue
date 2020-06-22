@@ -37,6 +37,7 @@
                         退出登录
                     </a-menu-item>
                 </a-menu>
+                    <p v-if="!guide" style="color: #4a76af;font-size: 26px;font-family: 'Comic Sans MS',serif"><strong>-{{location[state]}}-</strong></p>
                 </div>
             </a-dropdown>
         </div>
@@ -52,8 +53,9 @@ export default {
     },
     data() {
         return {
+            state:0,
             guide:false,
-            current: ['1']
+            location:['Home Page','Writogether','My Creation','My Collection','Settings']
         }
     },
     computed: {
@@ -91,15 +93,19 @@ export default {
             this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         },
         jumpToMyStory() {
+            this.state=2;
             this.$router.push({ name: 'myStory', params: { userId: this.userId } })
         },
         jumpToUserInfo(){
+            this.state=4;
             this.$router.push({ name: 'info', params: { userInfo: this.userInfo } })
         },
         jumpToHome(){
+            this.state=0;
             this.$router.push({ name: 'home'})
         },
         jumpToMyCollection(){
+            this.state=3;
             this.$router.push({ name: 'collection'})
         }
     }
