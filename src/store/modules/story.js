@@ -27,6 +27,8 @@ const story = {
             depth:'',
             popularity:'',
             story:'',
+            rootTitle:'',
+            open:''
         },
         quickCreateModalVisible:false,
     },
@@ -45,6 +47,7 @@ const story = {
             state.storyParams.id=data;
         },
         set_storyParams:function (state, data) {
+            console.log(data);
             state.storyParams.fatherId=data.fatherId;
             state.storyParams.title=data.title;
             state.storyParams.tag=data.tag;
@@ -52,6 +55,8 @@ const story = {
             state.storyParams.depth=data.depth;
             state.storyParams.authorId=data.authorId;
             state.storyParams.authorName=data.userName;
+            state.storyParams.rootTitle=data.rootTitle;
+            state.storyParams.open=data.open;
         },
         set_storyContent:function (state, data) {
             state.storyParams.story=data.content;

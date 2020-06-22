@@ -10,10 +10,10 @@
                     >
                         <a-list-item slot="renderItem" slot-scope="item">
                             <div style="width: 10%;text-align: center"><a-icon type="fire"/>{{item.popularity}}</div>
-                            <div style="width: 30%;text-align: center">《{{ item.title }}》</div>
-                            <div style="width: 20%;text-align: center"  v-if="item.depth>0"><a-icon type="edit"/>第{{item.depth}}续篇</div>
-                            <div style="width: 20%;text-align: center" v-else><a-icon type="edit"/>首篇</div>
-                            <div style="width: 10%;text-align: center"><a-icon type="tag"/>{{item.tag}}</div>
+                            <div style="width: 40%;text-align: center"  v-if="item.depth>0">《{{item.rootTitle}}》-第{{item.depth}}续-《{{item.title}}》</div>
+                            <div style="width: 40%;text-align: center" v-else><a-icon type="edit"/>《{{item.title}}》-首篇</div>
+                            <div style="width: 15%;text-align: center"><a-icon type="tag"/>{{item.tag}}</div>
+                            <div style="width: 15%;text-align: center"><a-icon type="eye" v-if="item.open"/><a-icon type="eye-invisible" v-if="!item.open"/></div>
                             <div style="width: 5%"></div>
                             <a-button shape="round" size="small" @click="writogether(item)">WriTogether!</a-button>
                         </a-list-item>

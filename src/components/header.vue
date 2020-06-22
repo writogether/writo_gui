@@ -2,12 +2,12 @@
     <div class="header">
         <div class="logout">
             <a-dropdown >
-
                 <div class="user" @click="change_guide">
-
-                    <img src="../assets/guider-off.png" style="height: 200px; " alt="导航" v-if="!guide">
-                    <img src="../assets/guider-on.png" style="height: 200px; " alt="导航" v-if="guide">
+                    <img src="../assets/guider-off.png" style="height: 180px; " alt="导航" v-if="!guide">
+                    <img src="../assets/guider-on.png" style="height: 180px; " alt="导航" v-if="guide">
+                    <p v-if="!guide" style="background: white; color: #4a76af;font-size: 26px;font-family: 'Comic Sans MS',serif"><strong>-{{location[state]}}-</strong>
                     <a-icon style="margin-left: 3px; font-size: 16px" type="down"></a-icon>
+                    </p>
 
                 <a-menu class="aMenu" slot="overlay"  v-if="guide" style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
                     <a-menu-item>
@@ -37,7 +37,6 @@
                         退出登录
                     </a-menu-item>
                 </a-menu>
-                    <p v-if="!guide" style="color: #4a76af;font-size: 26px;font-family: 'Comic Sans MS',serif"><strong>-{{location[state]}}-</strong></p>
                 </div>
             </a-dropdown>
         </div>
