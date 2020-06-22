@@ -1,19 +1,20 @@
 <template>
-    <div style="width:85%;margin: 0 auto">
+    <div style="padding-top: 150px ;width:75%;margin: 0 auto">
         <div style="padding-top: 20px ;margin: 0 auto">
             <div class="list">
                 <div class="table">
                     <a-list
-                        :data-source="myList"
-                        :pagination="pagination"
-                        bordered
+                            :data-source="collectionList"
+                            :pagination="pagination"
+                            bordered
                     >
                         <a-list-item slot="renderItem" slot-scope="item">
-                            <div style="width: 10%;text-align: center">热度{{item.popularity}}</div>
+                            <div style="width: 10%;text-align: center"><a-icon type="fire"/>{{item.popularity}}</div>
                             <div style="width: 30%;text-align: center">《{{ item.title }}》</div>
-                            <div style="width: 15%;text-align: center" v-if="item.depth>0">第{{item.depth}}续篇</div>
-                            <div style="width: 15%;text-align: center" v-else>首篇</div>
-                            <div style="width: 15%;text-align: center">{{item.tag}}</div>
+                            <div style="width: 10%;text-align: center"><a-icon type="user"/>{{ item.userName }}</div>
+                            <div style="width: 20%;text-align: center"  v-if="item.depth>0"><a-icon type="edit"/>第{{item.depth}}续篇</div>
+                            <div style="width: 20%;text-align: center" v-else><a-icon type="edit"/>首篇</div>
+                            <div style="width: 10%;text-align: center"><a-icon type="tag"/>{{item.tag}}</div>
                             <div style="width: 5%"></div>
                             <a-button shape="round" size="small" @click="writogether(item)">WriTogether!</a-button>
                         </a-list-item>
@@ -21,7 +22,6 @@
                 </div>
             </div>
         </div>
-    
     </div>
 </template>
 
@@ -29,7 +29,7 @@
     import {mapActions, mapGetters, mapMutations} from 'vuex';
 
     export default {
-        name: 'myStory',
+        name: 'myCollection',
         components: {},
         data() {
             return {
@@ -40,13 +40,13 @@
             };
         },
         async mounted() {
-            await this.getStoryList();
+            await this.getCollection();
             await this.add();
         },
         computed: {
             ...mapGetters(
                 [
-                    'storyList',
+                    'collectionList',
                     'userId',
                     'userInfo',
                 ],
@@ -55,18 +55,18 @@
         methods: {
             ...mapMutations(
                 [
-                    'set_storyList',
+                    'set_collections',
                 ],
             ),
             ...mapActions(
                 [
-                    'getStoryList',
+                    'getCollection',
                 ],
             ),
             add() {
                 console.log(this.storyList.length);
                 for (let i = 0; i < this.storyList.length; i++) {
-                    if (this.storyList[i].authorId == this.userId) {
+                    if (this.storyList[i].authorId === this.userId) {
                         let obj = {};
                         obj.popularity = this.storyList[i].popularity;
                         obj.title = this.storyList[i].title;
@@ -96,9 +96,9 @@
         padding: 6px 6px;
         position: static;
         background-color: #313c5b;
-        
+
         .table {
-            background: #f0f2f5;
+            background: #ffffff;
             padding: 40px 20px;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
