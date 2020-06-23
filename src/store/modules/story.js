@@ -9,13 +9,14 @@ import {
     getStoryByFatherAPI,
     getStoryContentAPI,
     getSuspenseAPI,
-    uploadNewStoryAPI
+    uploadNewStoryAPI, getStoryHistoryAPI
 } from "../../api/story";
 
 const story = {
     state: {
         storyList:[],
         recreateList: [],
+        storyHistory:[],
         Visible: false,
         storyParams: {
             id:'',
@@ -39,6 +40,10 @@ const story = {
         set_recreateList:function (state,data) {
             state.recreateList=data
         },
+        set_storyHistory:function (state, data) {
+            state.storyHistory=data
+        }
+        ,
         set_quickCreateModalVisible:function (state,data) {
             state.quickCreateModalVisible=data
         },
@@ -68,6 +73,19 @@ const story = {
             const res=await getAllStoryAPI()
             commit('set_storyList',res)
         },
+        getStoryHistoryList:async ({state,commit},data)=>{
+            const res=await getStoryHistoryAPI(data)
+            console.log('data:',data)
+            console.log('history:',res)
+            commit('set_storyHistory',res)
+        },
+        getStoryHistory:async ({state,commit},data)=>{
+            commit('set_storyParams',state.storyHistory[data]);
+            const res=await getStoryContentAPI(state.storyParams.id);
+            commit('set_storyContent',res);
+
+        }
+        ,
         getAdventure:async ({state,commit,data})=> {
             const res = await getAdventureAPI();
             commit('set_storyList', res)

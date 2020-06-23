@@ -20,7 +20,7 @@
                                 <span class="value">{{ storyParams.story }}</span>
                             </div>
                             <div  style="width: 100%;padding: 20px 200px" v-if="storyParams.depth>0">
-                                    <a-slider style="float: left;width: 85%" v-model="inputValue1" :min="0" :max="storyParams.depth"  />
+                                    <a-slider style="float: left;width: 85%" v-model="inputValue1" @change="readHistory" :min="0" :max="storyParams.depth"  />
                                     <a-input-number style="float: right;width:10%" v-model="inputValue1" :min="0" :max="storyParams.depth"   />
 
                             </div>
@@ -196,17 +196,19 @@
                 'storyComments',
                 'userId',
                 'recreateList',
+                'storyHistory'
             ])
         },
         async mounted() {
             console.log(this.$route.params.id),
             await this.set_currentStoryId(Number(this.$route.params.id))
             await this.getStoryById(this.storyParams.id)
+            await this.getStoryHistoryList(Number(this.$route.params.id))
             await this.getContentById(this.storyParams.id)
             await this.getCommentById(this.storyParams.id)
              this.inputValue1=Number(this.storyParams.depth)
             this.evaluation=await this.getEval(this.storyParams.id)
-            console.log('eval:',this.evaluation)
+            console.log('history:',this.storyHistory)
             this.collected=await this.checkIfCollected(this.storyParams.id)
             this.getStoryByFather(this.storyParams.id)
             this.storyType=this.storyParams.tag
@@ -225,9 +227,16 @@
                 'checkIfCollected',
                 'evalStory',
                 'toggleCollect',
-                'uploadStory'
+                'uploadStory',
+                'getStoryHistoryList',
+                'getStoryHistory'
 
             ]),
+            readHistory(v){
+                console.log(v)
+                this.getStoryHistory(v);
+            }
+            ,
              likeEval(){
                 const evalData={
                     likerId:this.userId,
