@@ -6,22 +6,22 @@
                     <a-layout class="a_layout">
                         <a-layout-content class="story_board">
                             <div  style="font-size: 30px;text-align: center;padding-top: 20px">
-                                <span class="value">{{ storyParams.title }}</span>
+                                <span class="value">{{ this.storyHistory[this.section].title }}</span>
                             </div>
                             <div  style="font-size: 15px;text-align: center;padding-top: 30px">
-                                <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{storyParams.popularity}}</span>
-                                <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{ storyParams.authorName }}</span>
-                                <span class="value" style="padding: 0 20px" v-if="storyParams.depth>0"><a-icon type="edit"/> 第{{ storyParams.depth }}续篇</span>
+                                <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{this.storyHistory[this.section].popularity}}</span>
+                                <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{this.storyHistory[this.section].authorName }}</span>
+                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/> 第{{ this.storyHistory[this.section].depth }}续篇</span>
                                 <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/> 首篇</span>
 
                             </div>
                             <a-divider></a-divider>
                             <div style="font-size: 20px;height: 60%;text-align: left">
-                                <span class="value">{{ storyParams.story }}</span>
+                                <span class="value">{{ storyContent}}</span>
                             </div>
                             <div  style="width: 100%;padding: 20px 200px" v-if="storyParams.depth>0">
-                                    <a-slider style="float: left;width: 85%" v-model="inputValue1" @change="readHistory" :min="0" :max="storyParams.depth"  />
-                                    <a-input-number style="float: right;width:10%" v-model="inputValue1" :min="0" :max="storyParams.depth"   />
+                                    <a-slider style="float: left;width: 85%" v-model="section" @change="readHistory" :min="0" :max="storyParams.depth"  />
+                                    <a-input-number style="float: right;width:10%" v-model="section" :min="0" :max="storyParams.depth"   />
 
                             </div>
                             <div style="font-size: 20px;text-align: center;padding: 20px 20px">
@@ -66,22 +66,22 @@
                     <a-layout class="a_layout">
                         <a-layout-content class="story_board_half">
                             <div  style="font-size: 30px;text-align: center;padding-top: 20px">
-                                <span class="value">{{ storyParams.title }}</span>
+                                <span class="value">{{ this.storyHistory[this.section].title }}</span>
                             </div>
                             <div  style="font-size: 15px;text-align: center;padding-top: 30px">
-                                <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{storyParams.popularity}}</span>
-                                <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{ storyParams.authorName }}</span>
-                                <span class="value" style="padding: 0 20px" v-if="storyParams.depth>0"><a-icon type="edit"/> 第{{ storyParams.depth }}续篇</span>
+                                <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{this.storyHistory[this.section].popularity}}</span>
+                                <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{this.storyHistory[this.section].authorName }}</span>
+                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/> 第{{ this.storyHistory[this.section].depth }}续篇</span>
                                 <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/> 首篇</span>
 
                             </div>
                             <a-divider></a-divider>
                             <div style="font-size: 20px;height: 68%;text-align: left">
-                                <span class="value">{{ storyParams.story }}</span>
+                                <span class="value">{{ storyContent }}</span>
                             </div>
                             <div  style="width: 100%;padding: 10px 50px;" v-if="storyParams.depth>0">
-                                <a-slider style="float: left;width: 85%" v-model="inputValue1" :min="0" :max="storyParams.depth"  />
-                                <a-input-number style="float: right;width:10%" v-model="inputValue1" :min="0" :max="storyParams.depth"   />
+                                <a-slider style="float: left;width: 85%" v-model="section" :min="0" :max="storyParams.depth"  />
+                                <a-input-number style="float: right;width:10%" v-model="section" :min="0" :max="storyParams.depth"   />
                             </div>
 
                         </a-layout-content>
@@ -175,6 +175,7 @@
         },
         data(){
             return{
+                section:'',
                 setOpen:'',
                 storyType:'',
                 recreateVisible:false,
@@ -183,7 +184,6 @@
                 pagination:{
                     pageSize:6
                 },
-                inputValue1: 0,
                 findRecreate:false,
             }
         },
@@ -193,6 +193,7 @@
         computed:{
             ...mapGetters([
                 'storyParams',
+                'storyContent',
                 'storyComments',
                 'userId',
                 'recreateList',
@@ -202,24 +203,22 @@
         async mounted() {
             console.log(this.$route.params.id),
             await this.set_currentStoryId(Number(this.$route.params.id))
-            await this.getStoryById(this.storyParams.id)
-            await this.getStoryHistoryList(Number(this.$route.params.id))
-            await this.getContentById(this.storyParams.id)
+            await this.getStoryParams()
+            this.section=this.storyParams.depth
+            console.log('storyParams:',this.storyParams)
+            console.log('storyParams2:',this.storyHistory,this.section,this.storyHistory[this.section])
+
             await this.getCommentById(this.storyParams.id)
-             this.inputValue1=Number(this.storyParams.depth)
             this.evaluation=await this.getEval(this.storyParams.id)
-            console.log('history:',this.storyHistory)
             this.collected=await this.checkIfCollected(this.storyParams.id)
             this.getStoryByFather(this.storyParams.id)
-            this.storyType=this.storyParams.tag
+            this.storyType=this.storyHistory[this.section].tag
         },
         methods: {
             ...mapMutations([
                 'set_currentStoryId',
             ]),
             ...mapActions([
-                'getStoryById',
-                'getContentById',
                 'getCommentById',
                 'sendComment',
                 'getStoryByFather',
@@ -228,13 +227,13 @@
                 'evalStory',
                 'toggleCollect',
                 'uploadStory',
-                'getStoryHistoryList',
-                'getStoryHistory'
+                'getStoryParams',
+                'getContentById'
 
             ]),
             readHistory(v){
                 console.log(v)
-                this.getStoryHistory(v);
+                this.getContentById(this.storyHistory[v].id)
             }
             ,
              likeEval(){

@@ -37,7 +37,7 @@
                 <div style="width: 40%;text-align: center;color: #4a76af"  v-if="item.depth>0">《{{item.rootTitle}}》-第{{item.depth}}续-《{{item.title}}》</div>
                 <div style="width: 40%;text-align: center;color: #4a76af" v-else>《{{item.title}}》-首篇</div>
                 </a-popover>
-                <div style="width: 15%;text-align: center"><a-icon type="user"/>{{ item.userName }}</div>
+                <div style="width: 15%;text-align: center"><a-icon type="user"/>{{ item.authorName }}</div>
                 <div style="width: 15%;text-align: center"><a-icon type="tag"/>{{item.tag}}</div>
                 <div style="width: 5%"></div>
                 <a-button  shape="round" size="small"  @click="writogether(item)"><a-icon type="edit"/>WriTogether!</a-button>

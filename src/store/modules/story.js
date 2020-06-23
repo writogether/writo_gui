@@ -16,32 +16,27 @@ const story = {
     state: {
         storyList:[],
         recreateList: [],
-        storyHistory:[],
         Visible: false,
+        storyHistory:[],
         storyParams: {
             id:'',
-            fatherId:'',
-            authorId:'',
-            authorName:'',
-            title:'',
-            tag:'',
             depth:'',
-            popularity:'',
-            story:'',
-            rootTitle:'',
-            open:''
         },
+        storyContent:'',
         quickCreateModalVisible:false,
     },
     mutations: {
         set_storyList:function (state,data) {
             state.storyList=data
         },
+        set_storyHistory:function(state,list){
+            state.storyHistory=list
+        },
         set_recreateList:function (state,data) {
             state.recreateList=data
         },
-        set_storyHistory:function (state, data) {
-            state.storyHistory=data
+        set_storyParams:function (state,depth) {
+            state.storyParams.depth=depth;
         }
         ,
         set_quickCreateModalVisible:function (state,data) {
@@ -51,20 +46,8 @@ const story = {
             console.log(data)
             state.storyParams.id=data;
         },
-        set_storyParams:function (state, data) {
-            console.log(data);
-            state.storyParams.fatherId=data.fatherId;
-            state.storyParams.title=data.title;
-            state.storyParams.tag=data.tag;
-            state.storyParams.popularity=data.popularity;
-            state.storyParams.depth=data.depth;
-            state.storyParams.authorId=data.authorId;
-            state.storyParams.authorName=data.userName;
-            state.storyParams.rootTitle=data.rootTitle;
-            state.storyParams.open=data.open;
-        },
         set_storyContent:function (state, data) {
-            state.storyParams.story=data.content;
+            state.storyContent=data.content;
         },
 
     },
@@ -73,17 +56,14 @@ const story = {
             const res=await getAllStoryAPI()
             commit('set_storyList',res)
         },
-        getStoryHistoryList:async ({state,commit},data)=>{
-            const res=await getStoryHistoryAPI(data)
-            console.log('data:',data)
-            console.log('history:',res)
-            commit('set_storyHistory',res)
-        },
-        getStoryHistory:async ({state,commit},data)=>{
-            commit('set_storyParams',state.storyHistory[data]);
+        getStoryParams:async ({state,commit})=>{
+            const list=await getStoryHistoryAPI(state.storyParams.id)
+            const depth=list.length-1
+            console.log('history:',list)
+            commit('set_storyParams',depth)
+            commit('set_storyHistory',list)
             const res=await getStoryContentAPI(state.storyParams.id);
             commit('set_storyContent',res);
-
         }
         ,
         getAdventure:async ({state,commit,data})=> {
@@ -114,10 +94,6 @@ const story = {
             commit('set_quickCreateModalVisible', false);
             const res2=await getAllStoryAPI()
             commit('set_storyList',res2)
-        },
-        getStoryById:async ({state,commit},data)=>{
-            const res=await getStoryByIdAPI(data);
-            commit('set_storyParams',res);
         },
         getStoryByFather:async ({state,commit},data)=>{
             const res=await getStoryByFatherAPI(data);
