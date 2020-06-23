@@ -54,7 +54,7 @@ export default {
         return {
             status:0,
             guide:false,
-            location:['Home Page','Writogether','My Creation','My Collection','Settings','Story']
+            location:['Home Page','Writogether','My Creation','My Collection','Settings']
         }
     },
     computed: {
@@ -81,7 +81,6 @@ export default {
             else if(this.$route.name==='myStory')this.status=2;
             else if(this.$route.name==='collection')this.status=3;
             else if(this.$route.name==='info')this.status=4;
-            else if(this.$route.name==='storyContent')this.status=5;
         },
         change_guide(){
             this.guide=!this.guide;
