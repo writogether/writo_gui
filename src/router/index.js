@@ -46,6 +46,20 @@ const routes = [
     ],
   },
   {
+    path: '/writeTogether',
+    name: 'writo',
+    component: () => import('../views/layout'),
+    children: [
+      {
+        path: '/writeTogether',
+        name: 'writo',
+        component: () => import('../views/story/writo'),
+      },
+
+    ],
+  },
+
+  {
     path: '/myStory',
     name: 'myStory',
     component: () => import('../views/layout'),

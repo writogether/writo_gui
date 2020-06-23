@@ -1,5 +1,5 @@
 <template>
-    <div style="padding-top: 195px ;width:75%;margin: 0 auto">
+    <div style="padding: 150px 40px 0;width:75%;margin: 0 auto">
         <a-tabs default-active-key="1">
             <a-tab-pane key="1" tab="故事阅读">
                 <div class="content">
@@ -120,8 +120,8 @@
                                     style="width: 15%"
                                     v-decorator="['setOpen',{ rules: [{ required: true, message: '请选择公开权限' }] }]"
                             >
-                                <a-select-option value=0>是</a-select-option>
-                                <a-select-option value=1>否</a-select-option>
+                                <a-select-option value='0'>是</a-select-option>
+                                <a-select-option value='1'>否</a-select-option>
                             </a-select>
                             <a-popconfirm
                                     style="float: right;"
@@ -175,7 +175,7 @@
         },
         data(){
             return{
-                setOpen:0,
+                setOpen:'',
                 storyType:'',
                 recreateVisible:false,
                 evaluation:'',
@@ -292,12 +292,14 @@
 </script>
 <style scoped>
     .content{
+        padding-top: 20px;
         background: none;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
 
     }
     .content_half{
+        padding-top: 20px;
         float: left;
         width:50%;
         background: none;

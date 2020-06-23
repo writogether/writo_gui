@@ -6,7 +6,7 @@ import {getUserInfoAPI, loginAPI, registerAPI, updateUserInfoAPI} from '../../ap
 const getDefaultState = () => {
     return {
         userId: '',
-        userInfo: {}
+        userInfo: {},
     };
 };
 

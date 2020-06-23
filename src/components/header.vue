@@ -5,7 +5,7 @@
                 <div class="user" @click="change_guide">
                     <img src="../assets/guider-off.png" style="height: 180px; " alt="导航" v-if="!guide">
                     <img src="../assets/guider-on.png" style="height: 180px; " alt="导航" v-if="guide">
-                    <p v-if="!guide" style="background: white; color: #4a76af;font-size: 26px;font-family: 'Comic Sans MS',serif"><strong>-{{location[state]}}-</strong>
+                    <p v-if="!guide" style="background: white; color: #4a76af;font-size: 26px;font-family: 'Comic Sans MS',serif"><strong>-{{location[status]}}-</strong>
                     <a-icon style="margin-left: 3px; font-size: 16px" type="down"></a-icon>
                     </p>
 
@@ -17,7 +17,7 @@
                         <a-icon type="home"></a-icon>
                         首页
                     </a-menu-item>
-                    <a-menu-item>
+                    <a-menu-item @click="jumpToRecreate">
                         <a-icon type="edit"></a-icon>
                         故事创作
                 </a-menu-item>
@@ -52,9 +52,9 @@ export default {
     },
     data() {
         return {
-            state:0,
+            status:0,
             guide:false,
-            location:['Home Page','Writogether','My Creation','My Collection','Settings']
+            location:['Home Page','Writogether','My Creation','My Collection','Settings','Story']
         }
     },
     computed: {
@@ -65,47 +65,50 @@ export default {
     },
     async mounted() {
         await this.getUserInfo();
-
-        if (this.$route.name === 'home') {
-            this.current = ['1']
-        }else if(this.$route.name === 'myStory') {
-            this.current = ['2']
-        }
-
-
+        this.refresh_guide();
     },
     methods: {
         ...mapMutations([
-
+            'set_page_status'
         ]),
         ...mapActions([
             'logout',
             'getUserInfo'
         ]),
+        refresh_guide(){
+            if(this.$route.name==='home'||this.$route.name==='storyList')this.status=0;
+            else if(this.$route.name==='writo')this.status=1;
+            else if(this.$route.name==='myStory')this.status=2;
+            else if(this.$route.name==='collection')this.status=3;
+            else if(this.$route.name==='info')this.status=4;
+            else if(this.$route.name==='storyContent')this.status=5;
+        },
         change_guide(){
             this.guide=!this.guide;
-        },
-        selectMenu(){
         },
         async quit() {
             await this.$store.dispatch('logout')
             this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         },
         jumpToMyStory() {
-            this.state=2;
+            this.status=2;
             this.$router.push({ name: 'myStory', params: { userId: this.userId } })
         },
         jumpToUserInfo(){
-            this.state=4;
+            this.status=4;
             this.$router.push({ name: 'info', params: { userInfo: this.userInfo } })
         },
         jumpToHome(){
-            this.state=0;
+            this.status=0;
             this.$router.push({ name: 'home'})
         },
         jumpToMyCollection(){
-            this.state=3;
+            this.status=3;
             this.$router.push({ name: 'collection'})
+        },
+        jumpToRecreate(){
+            this.status=1;
+            this.$router.push({ name: 'writo'})
         }
     }
 }
