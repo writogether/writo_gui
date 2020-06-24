@@ -5,15 +5,15 @@
                 <div class="content">
                     <a-layout class="a_layout">
                         <a-layout-content class="story_board">
-                            <div  style="font-size: 30px;text-align: center;padding-top: 20px">
+                            <div  style="font-size: 26px;text-align: center;padding-top: 20px">
                                 <span class="value">{{ this.storyHistory[this.section].title }}</span>
                             </div>
                             <div  style="font-size: 15px;text-align: center;padding-top: 30px">
                                 <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{this.storyHistory[this.section].popularity}}</span>
                                 <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{this.storyHistory[this.section].authorName }}</span>
-                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/> 第{{ this.storyHistory[this.section].depth }}续篇</span>
-                                <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/> 首篇</span>
-
+                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-续{{ this.storyHistory[this.section].depth }}</span>
+                                <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-首篇</span>
+                                <a-button type="link" size="small" style="color: #4a76af;" @click="goBackToHistory" v-if="this.storyHistory[this.section].depth<this.storyParams.depth">回到这篇>></a-button>
                             </div>
                             <a-divider></a-divider>
                             <div style="font-size: 20px;height: 60%;text-align: left">
@@ -24,7 +24,7 @@
                                     <a-input-number style="float: right;width:10%" v-model="section" :min="0" :max="storyParams.depth"   />
 
                             </div>
-                            <div style="font-size: 20px;text-align: center;padding: 20px 20px">
+                            <div style="font-size: 20px;text-align: center;padding: 20px 20px" v-if="this.storyHistory[this.section].depth===this.storyParams.depth">
                                 <span >
                                     <span v-if="evaluation==='Like'"><a-icon type="smile"/> Like it!</span>
                                     <span v-else-if="evaluation==='Dislike'"><a-icon type="meh"/> Emm..</span>
@@ -65,22 +65,22 @@
                 <div class="content_half">
                     <a-layout class="a_layout">
                         <a-layout-content class="story_board_half">
-                            <div  style="font-size: 30px;text-align: center;padding-top: 20px">
+                            <div  style="font-size: 26px;text-align: center;padding-top: 20px">
                                 <span class="value">{{ this.storyHistory[this.section].title }}</span>
                             </div>
                             <div  style="font-size: 15px;text-align: center;padding-top: 30px">
                                 <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{this.storyHistory[this.section].popularity}}</span>
                                 <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{this.storyHistory[this.section].authorName }}</span>
-                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/> 第{{ this.storyHistory[this.section].depth }}续篇</span>
-                                <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/> 首篇</span>
+                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-续{{ this.storyHistory[this.section].depth }}</span>
+                                <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-首篇</span>
 
                             </div>
                             <a-divider></a-divider>
-                            <div style="font-size: 20px;height: 68%;text-align: left">
+                            <div style="font-size: 20px;height: 75%;text-align: left">
                                 <span class="value">{{ storyContent }}</span>
                             </div>
                             <div  style="width: 100%;padding: 10px 50px;" v-if="storyParams.depth>0">
-                                <a-slider style="float: left;width: 85%" v-model="section" :min="0" :max="storyParams.depth"  />
+                                <a-slider style="float: left;width: 85%" @change="readHistory" v-model="section" :min="0" :max="storyParams.depth"  />
                                 <a-input-number style="float: right;width:10%" v-model="section" :min="0" :max="storyParams.depth"   />
                             </div>
 
@@ -139,11 +139,11 @@
                 </div>
             </a-tab-pane>
             <a-tab-pane key="3" tab="评论区">
-                <div style="width:60%;float: left;padding-top: 20px;">
+                <div style="width:60%;float: left;padding-top: 20px;padding-left: 20px;">
                     <a-list
                             :data-source="storyComments"
                             :pagination="pagination"
-                            style="height: auto"
+                            style="height: 300px;padding-left: 20px"
                             bordered>
                         <a-list-item slot="renderItem" slot-scope="item">
                             <div style="font-size: 16px">{{item.userName}} : {{item.content}}</div>
@@ -152,14 +152,14 @@
                 </div>
                 <div style="width:35%;float: right;" >
                     <h3 style="padding: 20px 0 "><span style="color:#313c5b;font-weight:bold;">发表评论</span></h3>
-                    <p><a-textarea rows="10"   placeholder="在此发表" id="comment_content" ></a-textarea></p>
+                    <p><textarea style="width: 100%;height: 200px;line-height: 1.5;padding:5px 10px"  placeholder="说点什么吧！" id="comment_content" ></textarea></p>
                     <p style="text-align:right;"><a-button class="button" @click="Comment">发表</a-button></p>
                 </div>
                 <a-divider></a-divider>
             </a-tab-pane>
             <a-divider style="padding-bottom: 20px">评论区</a-divider>
         </a-tabs>
-</div>
+    </div>
 </template>
 <script>
     import { mapGetters, mapActions, mapMutations } from 'vuex'
@@ -235,6 +235,14 @@
             readHistory(v){
                 console.log(v)
                 this.getContentById(this.storyHistory[v].id)
+            },
+            goBackToHistory(){
+                this.$router.push({
+                    name:'storyContent',
+                    params:{
+                        id:this.storyHistory[this.section].id
+                    }
+                }).then(this.reload());
             }
             ,
              likeEval(){
@@ -272,6 +280,7 @@
                     content:document.getElementById('comment_content').value
                 }
                 this.sendComment(data);
+                document.getElementById('comment_content').value="";
 
             },
             writogether(record){

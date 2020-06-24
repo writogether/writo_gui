@@ -21,14 +21,15 @@
                     <a-icon slot="prefix" type="book" :style="{ color: 'rgba(0,0,0,.25)' }" />
                 </a-input>
             </a-form-item>
-            <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }">
+            <a-form-item label="个人介绍" :label-col="{ span: 3 }" :wrapper-col="{ span: 8, offset: 1  }" default>
                 <span v-if="!modify">{{userInfo.description}}</span>
-                <a-textarea
+                <textarea
+                        style="width: 100%;line-height: 1.5;padding: 5px 10px;"
+                        rows="5"
                         v-if="modify"
-                        rows="3"
                         placeholder="请填写个人介绍"
                         id="userDescription"
-                ></a-textarea>
+                ></textarea>
             </a-form-item>
             <a-form-item :wrapper-col="{ span: 12, offset: 5 }" v-if="modify">
                 <a-button type="primary" @click="saveModify">
@@ -57,6 +58,7 @@
         name: 'info',
         data() {
             return {
+                desc:'',
                 userName:'',
                 phoneNumber:'',
                 modify: false,
@@ -134,9 +136,9 @@
                 setTimeout(() => {
                     this.form.setFieldsValue({
                         'userName': this.userInfo.username,
-                        'phoneNumber': this.userInfo.phoneNumber,
-                        'userDescription': this.userInfo.userDescription,
+                        'phoneNumber': this.userInfo.phoneNumber
                     });
+                    document.getElementById("userDescription").value=this.userInfo.description;
                 }, 0);
                 this.modify = true;
             },

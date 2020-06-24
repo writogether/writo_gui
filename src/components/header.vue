@@ -10,29 +10,27 @@
                     </p>
 
                 <a-menu class="aMenu" slot="overlay"  v-if="guide" style="padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
-                    <a-menu-item>
-                        <a-icon type="user" style="color: #4a76af"/>{{ userInfo.username }}
+                    <a-menu-item style="font-size: 18px" @click="jumpToUserInfo()">
+                        <a-icon type="user" style="color: #4a76af"/>
+                        {{ userInfo.username }}
                     </a-menu-item>
-                    <a-menu-item @click="jumpToHome()">
+                    <a-menu-item style="font-size: 18px" @click="jumpToHome()">
                         <a-icon type="home"></a-icon>
                         首页
                     </a-menu-item>
-                    <a-menu-item @click="jumpToRecreate">
+                    <a-menu-item style="font-size: 18px" @click="jumpToRecreate">
                         <a-icon type="edit"></a-icon>
                         故事创作
                 </a-menu-item>
-                    <a-menu-item @click="jumpToMyStory()">
+                    <a-menu-item style="font-size: 18px" @click="jumpToMyStory()">
                         <a-icon type="profile"></a-icon>
                         我的创作
                     </a-menu-item>
-                    <a-menu-item @click="jumpToMyCollection()">
+                    <a-menu-item style="font-size: 18px" @click="jumpToMyCollection()">
                         <a-icon type="star"></a-icon>
                         我的收藏
                     </a-menu-item>
-                    <a-menu-item @click="jumpToUserInfo()">
-                    <a-icon type="setting"/>个人设置
-                </a-menu-item>
-                    <a-menu-item @click="quit()">
+                    <a-menu-item style="font-size: 18px" @click="quit()">
                         <a-icon type="poweroff"></a-icon>
                         退出登录
                     </a-menu-item>
@@ -53,7 +51,7 @@ export default {
     data() {
         return {
             status:0,
-            guide:false,
+            guide:true,
             location:['Home Page','Writogether','My Creation','My Collection','Settings']
         }
     },

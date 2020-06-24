@@ -78,7 +78,7 @@
                     fatherId:0,
                     authorId:this.userId,
                     title:document.getElementById("title").value,
-                    open:this.setOpen==='0',
+                    open:this.setOpen=='0',
                     description:document.getElementById("description").value,
                     content:document.getElementById("creation").value,
                     tag:this.storyType,

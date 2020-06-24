@@ -2,7 +2,7 @@
     <div style="padding: 150px 40px 0;width:75%;margin: 0 auto">
     <div class="storyList">
         <div style="background: #ffffff;padding: 20px 40px;border-top-left-radius: 10px;border-top-right-radius: 10px">
-            <span style="font-size: large ">选择故事类型：</span>
+            <span style="font-size: large ">故事列表 </span>
             <a-select v-model="storyType"
                 v-decorator="[
                 'storyType',
@@ -17,11 +17,7 @@
                 <a-select-option value='5'>Horror</a-select-option>
                 <a-select-option value='6'>Funny</a-select-option>
             </a-select>
-
-        <a-button  @click="write" size="large"  shape="round" style="float: right">
-            <a-icon type="plus"/>
-            创作你的新故事！
-        </a-button></div>
+        </div>
         <div class="table" >
         <a-list
             :data-source="storyList"
@@ -30,12 +26,13 @@
         >
             <a-list-item slot="renderItem" slot-scope="item">
                 <div style="width: 10%;text-align: center"><a-icon type="fire"/>{{item.popularity}}</div>
+                <div style="width: 30%;text-align: center;color: #4a76af" >{{item.rootTitle}}</div>
                 <a-popover title="故事简介" trigger="hover">
                     <template slot="content">
                         <p>{{item.description}}</p>
                     </template>
-                <div style="width: 40%;text-align: center;color: #4a76af"  v-if="item.depth>0">《{{item.rootTitle}}》-第{{item.depth}}续-《{{item.title}}》</div>
-                <div style="width: 40%;text-align: center;color: #4a76af" v-else>《{{item.title}}》-首篇</div>
+                <div style="width: 30%;text-align: center;color: #4a76af"  v-if="item.depth>0">续{{item.depth}}：{{item.title}}</div>
+                <div style="width: 30%;text-align: center;color: #4a76af" v-else>首篇</div>
                 </a-popover>
                 <div style="width: 15%;text-align: center"><a-icon type="user"/>{{ item.authorName }}</div>
                 <div style="width: 15%;text-align: center"><a-icon type="tag"/>{{item.tag}}</div>
@@ -151,7 +148,7 @@
 
         .table{
             background: #ffffff;
-            padding: 40px 20px;
+            padding: 0px 20px;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
 
