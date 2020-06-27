@@ -38,13 +38,18 @@
                                 </span>
                                 <span style="padding: 0 20px">
                                     <a-button v-if="collected"  @click="collectStory"><a-icon type="star" theme="filled"/>已收藏</a-button>
-                                    <a-button v-else  @click="collectStory"><a-icon type="star"/>收藏</a-button>
+                                    <a-tooltip class="toolTip" title="点击收藏，下次阅读更方便哦！" v-if="!this.collected">
+                                    <a-button v-if="!collected"  @click="collectStory"><a-icon type="star"/>收藏</a-button>
+                                    </a-tooltip>
                                 </span>
                             </div>
                         </a-layout-content>
                     </a-layout>
                 </div>
-                <a-divider style="padding: 20px 50px"><a-button @click="find_recreate">寻找续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button></a-divider>
+                <a-divider style="padding: 20px 50px">
+                    <a-button @click="find_recreate" v-if="this.storyParams.depth>0">寻找 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button>
+                    <a-button @click="find_recreate" v-else> 寻找《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button>
+                </a-divider>
                 <div style="padding: 10px 50px" v-if="findRecreate">
                     <a-list
                             :data-source="recreateList"
@@ -91,7 +96,7 @@
                     </a-layout>
                 </div>
                 <div style="width: 45%;float: right;padding: 10px 0;height: 100%">
-                    <p style="margin-top: 10px;font-size: 16px;">为续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写下你的续篇吧！</p>
+                    <p style="margin-top: 10px;font-size: 16px;">为 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写下你的续篇吧！</p>
                     <a-form :form="form" style="margin-top: 10px;" >
                         <a-form-item >
                             <a-input
@@ -155,7 +160,7 @@
                     </a-list>
                 </div>
                 <div style="width:35%;float: right;" >
-                    <p style="padding: 20px 0 0 0 "><span style="color:#313c5b;font-size: 16px;">你认为续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写的怎么样呢？</span></p>
+                    <p style="padding: 20px 0 0 0 "><span style="color:#313c5b;font-size: 16px;">你认为 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写的怎么样呢？</span></p>
                     <p><textarea style="width: 100%;height: 200px;line-height: 1.5;padding:5px 10px"  placeholder="说说你的看法吧！" id="comment_content" ></textarea></p>
                     <p style="text-align:right;"><a-button class="button" @click="Comment">发表</a-button></p>
                 </div>
@@ -315,7 +320,7 @@
                     fatherId:this.storyParams.id,
                     authorId:this.userId,
                     title:this.form.getFieldValue('title'),
-                    open:this.form.getFieldValue('setOpen')==='0',
+                    open:this.form.getFieldValue('setOpen')=='0',
                     description:document.getElementById("description").value,
                     content:document.getElementById("recreation").value,
                     tag:this.form.getFieldValue('storyType'),
