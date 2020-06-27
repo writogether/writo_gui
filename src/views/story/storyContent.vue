@@ -1,19 +1,22 @@
 <template>
     <div style="padding: 150px 40px 0;width:75%;margin: 0 auto">
-        <a-tabs default-active-key="1">
+        <a-tabs default-active-key="1" @change="setKey">
             <a-tab-pane key="1" tab="故事阅读">
                 <div class="content">
                     <a-layout class="a_layout">
                         <a-layout-content class="story_board">
                             <div  style="font-size: 26px;text-align: center;padding-top: 20px">
-                                <span class="value">{{ this.storyHistory[this.section].title }}</span>
+                                <span class="value" v-if="this.storyHistory[this.section].depth>0">续{{ this.storyHistory[this.section].depth }} {{ this.storyHistory[this.section].title }}</span>
+                                <span class="value" v-else>{{ this.storyHistory[this.section].title }}</span>
                             </div>
                             <div  style="font-size: 15px;text-align: center;padding-top: 30px">
                                 <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{this.storyHistory[this.section].popularity}}</span>
                                 <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{this.storyHistory[this.section].authorName }}</span>
-                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-续{{ this.storyHistory[this.section].depth }}</span>
-                                <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-首篇</span>
-                                <a-button type="link" size="small" style="color: #4a76af;" @click="goBackToHistory" v-if="this.storyHistory[this.section].depth<this.storyParams.depth">回到这篇>></a-button>
+                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="book"/>《{{this.storyHistory[this.section].rootTitle}}》</span>
+                                <span class="value" style="padding: 0 20px" v-else><a-icon type="book"/>《{{this.storyHistory[this.section].rootTitle}}》</span>
+                                <a-tooltip class="toolTip" defaultVisible=true title="点击回到本篇章，寻找其它续写，发现更多可能！" v-if="this.storyHistory[this.section].depth<this.storyParams.depth&&this.key==1">
+                                    <a-button type="link" size="small" style="color: #4a76af;" @click="goBackToHistory" v-if="this.storyHistory[this.section].depth<this.storyParams.depth">回到这篇>></a-button>
+                                </a-tooltip>
                             </div>
                             <a-divider></a-divider>
                             <div style="font-size: 20px;height: 60%;text-align: left">
@@ -41,7 +44,7 @@
                         </a-layout-content>
                     </a-layout>
                 </div>
-                <a-divider style="padding: 20px 50px"><a-button @click="find_recreate">寻找续篇</a-button></a-divider>
+                <a-divider style="padding: 20px 50px"><a-button @click="find_recreate">寻找续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button></a-divider>
                 <div style="padding: 10px 50px" v-if="findRecreate">
                     <a-list
                             :data-source="recreateList"
@@ -66,14 +69,14 @@
                     <a-layout class="a_layout">
                         <a-layout-content class="story_board_half">
                             <div  style="font-size: 26px;text-align: center;padding-top: 20px">
-                                <span class="value">{{ this.storyHistory[this.section].title }}</span>
+                                <span class="value" v-if="this.storyHistory[this.section].depth>0">续{{ this.storyHistory[this.section].depth }} {{ this.storyHistory[this.section].title }}</span>
+                                <span class="value" v-else>{{ this.storyHistory[this.section].title }}</span>
                             </div>
                             <div  style="font-size: 15px;text-align: center;padding-top: 30px">
                                 <span class="value" style="padding: 0 20px"><a-icon type="fire"/> {{this.storyHistory[this.section].popularity}}</span>
                                 <span class="value" style="padding: 0 20px"><a-icon type="user"/> {{this.storyHistory[this.section].authorName }}</span>
-                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-续{{ this.storyHistory[this.section].depth }}</span>
-                                <span class="value" style="padding: 0 20px" v-else><a-icon type="edit"/>《{{this.storyHistory[this.section].rootTitle}}》-首篇</span>
-
+                                <span class="value" style="padding: 0 20px" v-if="this.storyHistory[this.section].depth>0"><a-icon type="book"/>《{{this.storyHistory[this.section].rootTitle}}》</span>
+                                <span class="value" style="padding: 0 20px" v-else><a-icon type="book"/>《{{this.storyHistory[this.section].rootTitle}}》</span>
                             </div>
                             <a-divider></a-divider>
                             <div style="font-size: 20px;height: 75%;text-align: left">
@@ -88,6 +91,7 @@
                     </a-layout>
                 </div>
                 <div style="width: 45%;float: right;padding: 10px 0;height: 100%">
+                    <p style="margin-top: 10px;font-size: 16px;">为续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写下你的续篇吧！</p>
                     <a-form :form="form" style="margin-top: 10px;" >
                         <a-form-item >
                             <a-input
@@ -106,7 +110,7 @@
                             <span>故事类型：</span>
                             <a-select
                                     style="width: 30%"
-                                    v-decorator="['storyType',{ rules: [{ required: true, message: '请选择故事类型' }] }]"
+                                    v-model="storyType"
                             >
                                 <a-select-option value='Adventure'>Adventure</a-select-option>
                                 <a-select-option value='Romantic'>Romantic</a-select-option>
@@ -118,7 +122,7 @@
                             <span style="padding-left: 5%;">是否公开：</span>
                             <a-select
                                     style="width: 15%"
-                                    v-decorator="['setOpen',{ rules: [{ required: true, message: '请选择公开权限' }] }]"
+                                    v-model="setOpen"
                             >
                                 <a-select-option value='0'>是</a-select-option>
                                 <a-select-option value='1'>否</a-select-option>
@@ -151,13 +155,12 @@
                     </a-list>
                 </div>
                 <div style="width:35%;float: right;" >
-                    <h3 style="padding: 20px 0 "><span style="color:#313c5b;font-weight:bold;">发表评论</span></h3>
-                    <p><textarea style="width: 100%;height: 200px;line-height: 1.5;padding:5px 10px"  placeholder="说点什么吧！" id="comment_content" ></textarea></p>
+                    <p style="padding: 20px 0 0 0 "><span style="color:#313c5b;font-size: 16px;">你认为续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写的怎么样呢？</span></p>
+                    <p><textarea style="width: 100%;height: 200px;line-height: 1.5;padding:5px 10px"  placeholder="说说你的看法吧！" id="comment_content" ></textarea></p>
                     <p style="text-align:right;"><a-button class="button" @click="Comment">发表</a-button></p>
                 </div>
                 <a-divider></a-divider>
             </a-tab-pane>
-            <a-divider style="padding-bottom: 20px">评论区</a-divider>
         </a-tabs>
     </div>
 </template>
@@ -175,9 +178,10 @@
         },
         data(){
             return{
+                key:1,
                 title:'',
                 section:'',
-                setOpen:'',
+                setOpen:'是',
                 storyType:'',
                 recreateVisible:false,
                 evaluation:'',
@@ -232,6 +236,11 @@
                 'getContentById'
 
             ]),
+            setKey(v){
+                this.key=v;
+                this.section=this.storyParams.depth;
+            }
+            ,
             readHistory(v){
                 console.log(v)
                 this.getContentById(this.storyHistory[v].id)
@@ -265,8 +274,16 @@
             }
             ,
             collectStory(){
-                this.toggleCollect(this.storyParams.id);
                 this.collected=!this.collected;
+                console.log(this.collected,'!')
+                if(this.collected) {
+                    this.toggleCollect(
+                        {storyId: this.storyParams.id, status: true}
+                    );
+                }
+                else this.toggleCollect(
+                    {storyId: this.storyParams.id, status: false}
+                    );
             }
             ,
             find_recreate(){
@@ -293,6 +310,7 @@
                 }).then(this.reload());
             },
             submit(){
+                if(this.setOpen=='是')this.setOpen='0'
                 const data={
                     fatherId:this.storyParams.id,
                     authorId:this.userId,
@@ -358,6 +376,10 @@
         padding-left: 1.125rem;
         height: 6.5rem ;
         word-wrap:break-word;
+    }
+    .toolTip{
+        background-color: white;
+        color: #313c5b;
     }
 
 </style>

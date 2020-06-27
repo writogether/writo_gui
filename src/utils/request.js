@@ -49,7 +49,6 @@ service.interceptors.response.use((response) => {
     switch (response.status) {
         case 200:
             if (response.data.success) {
-                if (response.data.message) message.success(response.data.message);
                 return response.data.data;
             }
             message.error(response.data.message);

@@ -55,8 +55,8 @@
         components:{ATextarea},
         data(){
             return{
-                storyType:'',
-                setOpen:''
+                storyType:'Other',
+                setOpen:'是'
             }
         },
         computed:{
@@ -74,6 +74,7 @@
                 'uploadStory'
             ]),
             submit(){
+                if(this.setOpen=='是')this.setOpen='0'
                 const data={
                     fatherId:0,
                     authorId:this.userId,

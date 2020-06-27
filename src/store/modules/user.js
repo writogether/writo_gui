@@ -35,10 +35,12 @@ const user = {
             const res = await loginAPI(userData);
             setToken(res.id)
                 router.push('/story/storyList');
+            message.success('登陆成功');
 
         },
         register: async ({commit}, data) => {
             const res = await registerAPI(data);
+            message.success('注册成功');
         },
         getUserInfo({state, commit}) {
             return new Promise((resolve, reject) => {
@@ -61,13 +63,13 @@ const user = {
                 ...data,
             };
             const res = await updateUserInfoAPI(params);
-                message.success('修改成功');
 
         },
         logout: async ({commit}) => {
             removeToken();
             resetRouter();
             commit('reset_state');
+            message.success('登出成功');
         },
     },
 };

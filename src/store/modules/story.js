@@ -14,6 +14,7 @@ import {
     getPrivateStoryAPI,
     getPublicStoryAPI,
 } from "../../api/story";
+import {message} from "ant-design-vue";
 
 const story = {
     state: {
@@ -102,9 +103,9 @@ const story = {
         },
         uploadStory:async ({state,commit},data)=>{
             const res=await uploadNewStoryAPI(data);
-            commit('set_quickCreateModalVisible', false);
             const res2=await getAllStoryAPI()
             commit('set_storyList',res2)
+            message.success('提交成功');
         },
         getStoryByFather:async ({state,commit},data)=>{
             const res=await getStoryByFatherAPI(data);

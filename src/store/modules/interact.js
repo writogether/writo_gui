@@ -7,6 +7,7 @@ import {
     toggleCollectAPI,
     getCollection,
 } from"../../api/interact";
+import {message} from "ant-design-vue";
 
 const interact = {
     state: {
@@ -29,9 +30,12 @@ const interact = {
             commit('set_storyComment',res);
         },
         sendComment:async ({state,commit},data)=>{
-            const res=await sendCommentAPI(data);
-            const res2=await getCommentAPI(data.storyId);
-            commit('set_storyComment',res2);
+            if(data.content=='')message.error('评论不能为空！')
+            else {
+                const res = await sendCommentAPI(data);
+                const res2 = await getCommentAPI(data.storyId);
+                commit('set_storyComment', res2);
+            }
         },
         getEval:async ({state,commit},storyId)=>{
             const res= await getEvalAPI(storyId);
@@ -39,9 +43,13 @@ const interact = {
         },
         evalStory:async ({state,commit},data)=>{
             const res=await evaluateAPI(data);
+            message.success('评价成功');
         },
-        toggleCollect:async ({state,commit},storyId)=>{
-            const res=await toggleCollectAPI(storyId);
+        toggleCollect:async ({state,commit},data)=>{
+            const res=await toggleCollectAPI(data.storyId);
+            console.log(data.status)
+            if(data.status)message.success('收藏成功');
+            else message.success('取消收藏成功');
         }
         ,
         checkIfCollected:async ({state,commit},storyId)=>{

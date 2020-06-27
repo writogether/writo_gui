@@ -1,10 +1,9 @@
 <template>
     <div style="padding: 150px 40px 0;width:75%;margin: 0 auto">
             <div class="list">
-                <a-tabs>
-                    <a-tab-pane tab="故事公开" key="1">
+                <a-tabs class="table">
+                    <a-tab-pane tab="公开" key="1">
                         <div class="table">
-                            <div style="font-size: large ;padding-left: 20px;padding-bottom: 20px">我的创作 </div>
                             <a-list
                                     :data-source="publicStoryList"
                                     :pagination="pagination"
@@ -28,9 +27,8 @@
                             </a-list>
                         </div>
                     </a-tab-pane>
-                    <a-tab-pane tab="故事私有" key="2">
+                    <a-tab-pane tab="私密" key="2">
                         <div class="table">
-                            <div style="font-size: large ;padding-left: 20px;padding-bottom: 20px">我的创作 </div>
                             <a-list
                                     :data-source="privateStoryList"
                                     :pagination="pagination"
