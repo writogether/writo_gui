@@ -40,12 +40,10 @@
                 pagination: {
                     pageSize: 12,
                 },
-                myList: [],
             };
         },
         async mounted() {
             await this.getCollection();
-            await this.add();
         },
         computed: {
             ...mapGetters(
@@ -67,19 +65,6 @@
                     'getCollection',
                 ],
             ),
-            add() {
-                console.log(this.storyList.length);
-                for (let i = 0; i < this.storyList.length; i++) {
-                    if (this.storyList[i].authorId === this.userId) {
-                        let obj = {};
-                        obj.popularity = this.storyList[i].popularity;
-                        obj.title = this.storyList[i].title;
-                        obj.depth = this.storyList[i].depth;
-                        obj.tag = this.storyList[i].tag;
-                        this.myList.push(obj);
-                    }
-                }
-            },
             writogether(record) {
                 console.log(record);
                 this.$router.push({

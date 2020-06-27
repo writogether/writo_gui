@@ -9,7 +9,10 @@ import {
     getStoryByFatherAPI,
     getStoryContentAPI,
     getSuspenseAPI,
-    uploadNewStoryAPI, getStoryHistoryAPI
+    uploadNewStoryAPI,
+    getStoryHistoryAPI,
+    getPrivateStoryAPI,
+    getPublicStoryAPI,
 } from "../../api/story";
 
 const story = {
@@ -24,6 +27,8 @@ const story = {
         },
         storyContent:'',
         quickCreateModalVisible:false,
+        privateStoryList:[],
+        publicStoryList:[],
     },
     mutations: {
         set_storyList:function (state,data) {
@@ -48,6 +53,12 @@ const story = {
         },
         set_storyContent:function (state, data) {
             state.storyContent=data.content;
+        },
+        set_privateStoryList:function (state,data) {
+            state.privateStoryList=data
+        },
+        set_publicStoryList:function (state,data) {
+            state.publicStoryList=data
         },
 
     },
@@ -102,6 +113,14 @@ const story = {
         getContentById:async ({state,commit},data)=>{
             const res=await getStoryContentAPI(data);
             commit('set_storyContent',res);
+        },
+        getPublicStory:async ({state,commit},data)=>{
+            const res=await getPublicStoryAPI(data);
+            commit('set_publicStoryList',res);
+        },
+        getPrivateStory:async ({state,commit})=>{
+            const res=await getPrivateStoryAPI();
+            commit('set_privateStoryList',res);
         },
     }
 }

@@ -77,5 +77,15 @@ export function getStoryContentAPI(id) {
         method: 'GET',
     })
 }
+export function getPrivateStoryAPI() {
+    return axios.get(
+        `${api.storyPre}/private`
+    );
+}
+export function getPublicStoryAPI(username) {
+    return axios.get(
+        `${api.storyPre}/by-username?username=${username}`
+    );
+}
 
 

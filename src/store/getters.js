@@ -5,6 +5,8 @@ const getters = {
 
     //story
     storyList:state=>state.story.storyList,
+    privateStoryList:state=>state.story.privateStoryList,
+    publicStoryList:state=>state.story.publicStoryList,
     recreateList:state=>state.story.recreateList,
     storyHistory:state=>state.story.storyHistory,
     storyContent:state=>state.story.storyContent,
