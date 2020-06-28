@@ -2,9 +2,9 @@
     <div class="header">
         <div class="logout">
             <a-dropdown >
-                <div class="user" @click="change_guide">
-                    <img src="../assets/guider-off.png" style="height: 180px; " alt="导航" v-if="!guide">
-                    <img src="../assets/guider-on.png" style="height: 180px; " alt="导航" v-if="guide">
+                <div class="user">
+                    <img src="../assets/guider-off.png" style="height: 180px; " alt="导航" v-if="!guide" @click="change_guide">
+                    <img src="../assets/guider-on.png" style="height: 180px; " alt="导航" v-if="guide" @click="change_guide">
                     <p v-if="!guide" style="background: white; color: #4a76af;font-size: 26px;font-family: 'Comic Sans MS',serif"><strong>-{{location[status]}}-</strong>
                     <a-icon style="margin-left: 3px; font-size: 16px" type="down"></a-icon>
                     </p>
