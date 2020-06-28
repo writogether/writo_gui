@@ -19,8 +19,8 @@
                                 </a-tooltip>
                             </div>
                             <a-divider></a-divider>
-                            <div style="font-size: 20px;height: 60%;text-align: left">
-                                <span class="value">{{ storyContent}}</span>
+                            <div style="font-size: 16px;height: 60%;text-align: left;overflow: hidden">
+                                <span style="height: 100%;overflow: hidden" class="value">{{ storyContent}}</span>
                             </div>
                             <div  style="width: 100%;padding: 20px 200px" v-if="storyParams.depth>0">
                                     <a-slider style="float: left;width: 85%" v-model="section" @change="readHistory" :min="0" :max="storyParams.depth"  />
@@ -47,8 +47,8 @@
                     </a-layout>
                 </div>
                 <a-divider style="padding: 20px 50px">
-                    <a-button @click="find_recreate" v-if="this.storyParams.depth>0">寻找 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button>
-                    <a-button @click="find_recreate" v-else> 寻找《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button>
+                    <a-button style="max-width: 400px" @click="find_recreate" v-if="this.storyParams.depth>0">寻找 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button>
+                    <a-button style="max-width: 400px" @click="find_recreate" v-else> 寻找《{{this.storyHistory[this.storyParams.depth].title}}》的续篇</a-button>
                 </a-divider>
                 <div style="padding: 10px 50px" v-if="findRecreate">
                     <a-list
@@ -84,7 +84,7 @@
                                 <span class="value" style="padding: 0 20px" v-else><a-icon type="book"/>《{{this.storyHistory[this.section].rootTitle}}》</span>
                             </div>
                             <a-divider></a-divider>
-                            <div style="font-size: 20px;height: 75%;text-align: left">
+                            <div style="font-size: 16px;height: 75%;text-align: left">
                                 <span class="value">{{ storyContent }}</span>
                             </div>
                             <div  style="width: 100%;padding: 10px 50px;" v-if="storyParams.depth>0">
