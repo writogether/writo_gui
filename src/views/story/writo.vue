@@ -11,12 +11,12 @@
                     <a-select v-model="storyType"
                               style="width: 15%"
                     >
-                        <a-select-option value='1'>Adventure</a-select-option>
-                        <a-select-option value='2'>Romantic</a-select-option>
-                        <a-select-option value='3'>Suspense</a-select-option>
-                        <a-select-option value='4'>Other</a-select-option>
-                        <a-select-option value='5'>Horror</a-select-option>
-                        <a-select-option value='6'>Funny</a-select-option>
+                        <a-select-option value='0'>Adventure</a-select-option>
+                        <a-select-option value='1'>Romantic</a-select-option>
+                        <a-select-option value='2'>Suspense</a-select-option>
+                        <a-select-option value='3'>Other</a-select-option>
+                        <a-select-option value='4'>Horror</a-select-option>
+                        <a-select-option value='5'>Funny</a-select-option>
                     </a-select>
                     <span style="padding-left: 5%;">是否公开：</span>
                     <a-select
