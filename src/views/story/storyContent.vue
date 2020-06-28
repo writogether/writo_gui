@@ -20,7 +20,7 @@
                             </div>
                             <a-divider></a-divider>
                             <div style="font-size: 20px;height: 60%;text-align: left">
-                                <span class="value">{{ storyContent}}</span>
+                                <span class="value" style="white-space: pre-wrap">{{ storyContent}}</span>
                             </div>
                             <div  style="width: 100%;padding: 20px 200px" v-if="storyParams.depth>0">
                                     <a-slider style="float: left;width: 85%" v-model="section" @change="readHistory" :min="0" :max="storyParams.depth"  />
