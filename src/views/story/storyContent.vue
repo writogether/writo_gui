@@ -96,7 +96,8 @@
                     </a-layout>
                 </div>
                 <div style="width: 45%;float: right;padding: 10px 0;height: 100%">
-                    <p style="margin-top: 10px;font-size: 16px;">为 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写下你的续篇吧！</p>
+                    <p style="margin-top: 10px;font-size: 16px;" v-if="this.storyParams.depth==0">为《{{this.storyHistory[this.storyParams.depth].title}}》写下你的续篇吧！</p>
+                    <p style="margin-top: 10px;font-size: 16px;" v-if="this.storyParams.depth>0">为 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写下你的续篇吧！</p>
                     <a-form :form="form" style="margin-top: 10px;" >
                         <a-form-item >
                             <a-input
@@ -160,7 +161,10 @@
                     </a-list>
                 </div>
                 <div style="width:35%;float: right;" >
-                    <p style="padding: 20px 0 0 0 "><span style="color:#313c5b;font-size: 16px;">你认为 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写的怎么样呢？</span></p>
+                    <p style="padding: 20px 0 0 0 ">
+                        <span style="color:#313c5b;font-size: 16px;" v-if="this.storyParams.depth==0">你认为《{{this.storyHistory[this.storyParams.depth].title}}》写的怎么样呢？</span>
+                        <span style="color:#313c5b;font-size: 16px;" v-else>你认为 续{{this.storyParams.depth}}《{{this.storyHistory[this.storyParams.depth].title}}》写的怎么样呢？</span>
+                    </p>
                     <p><textarea style="width: 100%;height: 200px;line-height: 1.5;padding:5px 10px"  placeholder="说说你的看法吧！" id="comment_content" ></textarea></p>
                     <p style="text-align:right;"><a-button class="button" @click="Comment">发表</a-button></p>
                 </div>
