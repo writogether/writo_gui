@@ -324,7 +324,7 @@
                     fatherId:this.storyParams.id,
                     authorId:this.userId,
                     title:this.form.getFieldValue('title'),
-                    open:this.form.getFieldValue('setOpen')=='0',
+                    open:this.setOpen=='0',
                     description:document.getElementById("description").value,
                     content:document.getElementById("recreation").value,
                     tag:this.form.getFieldValue('storyType'),
